@@ -6,17 +6,18 @@ import com.pizzaria.backendpizzaria.domain.DTO.UsuarioDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.UsuarioService;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -24,14 +25,6 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> handleOptions() {
-        return ResponseEntity.ok().build();
-    }
 
     @PostMapping("/cadastro")
     public ResponseEntity<Map<String, Object>> registrarUsuario(@Validated @RequestBody UsuarioRegistroDTO usuarioDTO){
@@ -52,5 +45,24 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<Page<Usuario>> listarUsuarios(
+            @PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Usuario> usuarios = usuarioService.listarUsuarios(pageable);
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> atualizarUsuario(@Validated @PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuarioParaAtuallizar = usuarioService.atualizarUsuario(id, usuarioDTO);
+        Map<String, Object> response = new HashMap<>();
+        response.put("usuario", new UsuarioCreatedDTO(usuarioParaAtuallizar));
+        response.put("mensagem", "Usuário Atualizado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
 
 }

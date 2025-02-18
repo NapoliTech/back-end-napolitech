@@ -8,6 +8,8 @@ import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,19 @@ public class UsuarioService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    public Page<Usuario> listarUsuarios(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
+    }
+
+    public Usuario atualizarUsuario(Long id, UsuarioDTO usuario) {
+        Usuario usuarioAtualizado = new Usuario();
+        if (usuarioRepository.existsById(id)) {
+            usuarioAtualizado.setIdUsuario(id);
+            return usuarioRepository.save(usuarioAtualizado);
+        }
+        return null;
+    }
 
     @Transactional
     public Usuario registro(UsuarioRegistroDTO usuarioDTO) {
