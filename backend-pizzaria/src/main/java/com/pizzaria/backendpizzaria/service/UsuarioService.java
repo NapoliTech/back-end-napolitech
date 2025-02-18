@@ -124,4 +124,11 @@ public class UsuarioService {
         }
     }
 
+    @Transactional
+    public void deletarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ValidationException("Usuário não encontrado"));
+
+        usuarioRepository.delete(usuario);
+    }
 }

@@ -63,6 +63,14 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> deletarUsuario(@PathVariable Long id) {
+        usuarioService.deletarUsuario(id);
 
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensagem", "Usuário deletado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
 }
