@@ -1,11 +1,12 @@
 package com.pizzaria.backendpizzaria.service;
 
 import com.pizzaria.backendpizzaria.config.JwtUtil;
-import com.pizzaria.backendpizzaria.domain.DTO.UsuarioDTO;
-import com.pizzaria.backendpizzaria.domain.DTO.UsuarioRegistroDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,13 +36,18 @@ public class UsuarioService {
         return usuarioRepository.findAll(pageable);
     }
 
-    public Usuario atualizarUsuario(Long id, UsuarioDTO usuario) {
-        Usuario usuarioAtualizado = new Usuario();
-        if (usuarioRepository.existsById(id)) {
-            usuarioAtualizado.setIdUsuario(id);
-            return usuarioRepository.save(usuarioAtualizado);
-        }
-        return null;
+    @Transactional
+    public Usuario atualizarUsuario(Long id, UsuarioAtualizacaoDTO usuarioParaAtualizar) {
+        Usuario usuarioExistente = usuarioRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Usuário não encontrado com ID: " + id)
+        );
+
+        usuarioExistente.setSenha(passwordEncoder.encode(usuarioParaAtualizar.getSenha()));
+        usuarioExistente.setNome(usuarioParaAtualizar.getNome());
+        usuarioExistente.setEmail(usuarioParaAtualizar.getEmail());
+        usuarioExistente.setTelefone(usuarioParaAtualizar.getTelefone());
+
+        return usuarioRepository.save(usuarioExistente);
     }
 
     @Transactional

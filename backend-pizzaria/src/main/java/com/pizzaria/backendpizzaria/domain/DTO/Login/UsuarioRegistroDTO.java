@@ -1,8 +1,6 @@
-package com.pizzaria.backendpizzaria.domain.DTO;
+package com.pizzaria.backendpizzaria.domain.DTO.Login;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

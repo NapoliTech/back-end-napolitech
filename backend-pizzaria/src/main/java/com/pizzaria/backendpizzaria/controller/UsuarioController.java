@@ -1,9 +1,9 @@
 package com.pizzaria.backendpizzaria.controller;
 
-import com.pizzaria.backendpizzaria.domain.DTO.LoginDTO;
-import com.pizzaria.backendpizzaria.domain.DTO.UsuarioCreatedDTO;
-import com.pizzaria.backendpizzaria.domain.DTO.UsuarioDTO;
-import com.pizzaria.backendpizzaria.domain.DTO.UsuarioRegistroDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.LoginDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioCreatedDTO;
+import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> atualizarUsuario(@Validated @PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<Map<String, Object>> atualizarUsuario(@Validated @PathVariable Long id, @RequestBody UsuarioAtualizacaoDTO usuarioDTO) {
         Usuario usuarioParaAtuallizar = usuarioService.atualizarUsuario(id, usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuarioParaAtuallizar));

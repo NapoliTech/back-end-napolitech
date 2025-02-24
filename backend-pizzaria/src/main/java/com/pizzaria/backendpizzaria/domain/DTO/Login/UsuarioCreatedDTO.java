@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.domain.DTO;
+package com.pizzaria.backendpizzaria.domain.DTO.Login;
 
 import com.pizzaria.backendpizzaria.domain.Usuario;
 import lombok.Getter;
