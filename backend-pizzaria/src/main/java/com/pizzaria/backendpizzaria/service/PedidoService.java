@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PedidoService {
@@ -89,6 +90,10 @@ public class PedidoService {
         }
 
         return pedidoRepository.save(pedido);
+    }
+
+    public Optional<Pedido> listarPedidoPorId(Long id) {
+        return pedidoRepository.findById(Math.toIntExact(id));
     }
 
     public List<Pedido> listarPedidos() {

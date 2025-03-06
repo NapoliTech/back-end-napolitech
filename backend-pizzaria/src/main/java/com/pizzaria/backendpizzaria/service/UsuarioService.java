@@ -36,6 +36,10 @@ public class UsuarioService {
         return usuarioRepository.findAll(pageable);
     }
 
+    public Optional<Usuario> listarUsuariosPorId(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
     @Transactional
     public Usuario atualizarUsuario(Long id, UsuarioAtualizacaoDTO usuarioParaAtualizar) {
         Usuario usuarioExistente = usuarioRepository.findById(id).orElseThrow(() ->

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -51,6 +52,16 @@ public class UsuarioController {
             @PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Usuario> usuarios = usuarioService.listarUsuarios(pageable);
         return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> listarUsuarioPorId(
+            @PathVariable Long id
+    ){
+        Optional<Usuario> usuario = usuarioService.listarUsuariosPorId(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("usuario", usuario);
+        return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")

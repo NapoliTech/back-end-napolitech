@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,10 @@ public class ProdutoService {
         produto.setQuantidadeEstoque(produtoDTO.getQuantidade());
 
         return produtoRepository.save(produto);
+    }
+
+    public Optional<Produto> listarProdutoPorId(Integer id) {
+        return produtoRepository.findById(id);
     }
 
     public List<Produto> listarProdutos() {

@@ -2,6 +2,7 @@ package com.pizzaria.backendpizzaria.controller;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
+import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/pedidos")
 @RequiredArgsConstructor
@@ -43,6 +46,16 @@ public class PedidoController {
     public ResponseEntity<Pedido> atualizarStatusPedido(@PathVariable Long id, @RequestBody AtualizarStatusPedidoDTO statusPedido) {
         Pedido pedidoAtualizado = pedidoService.atualizarStatusPedido(id, statusPedido.getStatus());
         return new ResponseEntity<>(pedidoAtualizado, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> listarPedidoPorId(
+            @PathVariable Long id
+    ){
+        Optional<Pedido> pedido = pedidoService.listarPedidoPorId(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("pedido", pedido);
+        return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping

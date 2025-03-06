@@ -1,6 +1,7 @@
 package com.pizzaria.backendpizzaria.controller;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Produto;
+import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -35,6 +37,16 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("erro", "Erro ao cadastrar produto: " + e.getMessage()));
         }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> listarProdutosPorId(
+            @PathVariable Integer id
+    ){
+        Optional<Produto> produto = produtoService.listarProdutoPorId(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("produto", produto);
+        return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping
