@@ -1,7 +1,6 @@
 package com.pizzaria.backendpizzaria.controller;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Produto;
-import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,5 +52,17 @@ public class ProdutoController {
     public ResponseEntity<List<Produto>> listarProdutos() {
         List<Produto> produtos = produtoService.listarProdutos();
         return ResponseEntity.ok(produtos);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> deletarProduto(@PathVariable Integer id) {
+        boolean deletado = produtoService.deletarProduto(id);
+
+        if (!deletado) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("erro", "Produto não encontrado!"));
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of("mensagem", "Produto deletado com sucesso!"));
     }
 }
