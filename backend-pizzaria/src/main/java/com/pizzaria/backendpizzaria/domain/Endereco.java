@@ -31,4 +31,7 @@ public class Endereco {
     @NotEmpty
     private String cep;
 
+    @OneToOne(mappedBy = "endereco")
+    private Usuario usuario;
+
 }

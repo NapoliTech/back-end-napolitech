@@ -44,4 +44,8 @@ public class Usuario {
 
     @NotBlank
     private String tipoUsuario;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
+    private Endereco endereco;
 }
