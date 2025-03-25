@@ -2,9 +2,6 @@ package com.pizzaria.backendpizzaria.domain;
 
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,9 +11,6 @@ import static com.pizzaria.backendpizzaria.domain.Enum.StatusPedido.CRIADO;
 
 @Entity
 @Table(name = "pedidos")
-@Getter
-@Setter
-@NoArgsConstructor
 public class Pedido {
 
     @Id
@@ -51,6 +45,62 @@ public class Pedido {
         this.statusPedido = CRIADO;
         this.precoTotal = precoTotal;
         this.itens = itens;
+        this.dataPedido = dataPedido;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
+    public Double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(Double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public LocalDateTime getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(LocalDateTime dataPedido) {
         this.dataPedido = dataPedido;
     }
 }

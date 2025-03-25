@@ -1,15 +1,10 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pizzaria.backendpizzaria.domain.ItemPedido;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemPedidoDTO {
     private String produto;
@@ -27,6 +22,25 @@ public class ItemPedidoDTO {
             @JsonProperty("precoUnitario") Double precoUnitario
     ) {
         this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
+    public ItemPedidoDTO() {
+    }
+
+    public String getProduto() {
+        return produto;
+    }
+
+    public void setProduto(String produto) {
+        this.produto = produto;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 }

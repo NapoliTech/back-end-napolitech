@@ -1,12 +1,9 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
+
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
-import com.pizzaria.backendpizzaria.domain.Pedido;
-import lombok.Getter;
-import lombok.Setter;
+
 import java.util.List;
 
-@Getter
-@Setter
 public class PedidoDTO {
     private Long pedidoId;
     private Long clienteId;
@@ -15,4 +12,60 @@ public class PedidoDTO {
     private List<ItemPedidoDTO> itens;
     private String telefone;
     private StatusPedido statusPedido;
+
+    public Long getPedidoId() {
+        return pedidoId;
+    }
+
+    public void setPedidoId(Long pedidoId) {
+        this.pedidoId = pedidoId;
+    }
+
+    public Long getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public List<ItemPedidoDTO> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedidoDTO> itens) {
+        this.itens = itens;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
 }
