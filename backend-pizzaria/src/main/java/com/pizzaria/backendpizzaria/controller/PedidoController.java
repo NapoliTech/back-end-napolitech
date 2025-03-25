@@ -1,10 +1,9 @@
 package com.pizzaria.backendpizzaria.controller;
+
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
-import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.PedidoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +15,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pedidos")
-@RequiredArgsConstructor
 public class PedidoController {
 
     private final PedidoService pedidoService;
+
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody PedidoDTO pedidoDTO) {

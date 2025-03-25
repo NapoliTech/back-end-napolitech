@@ -21,6 +21,9 @@ public class Pedido {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Usuario cliente;
 
+    @OneToOne
+    private Endereco endereco;
+
     private String nomeCliente;
 
     private StatusPedido statusPedido;
@@ -31,6 +34,9 @@ public class Pedido {
     private List<ItemPedido> itens = new ArrayList<>();
 
     private LocalDateTime dataPedido;
+
+    public Pedido() {
+    }
 
     public void calcularValorTotal() {
         this.precoTotal = itens.stream()
@@ -46,6 +52,14 @@ public class Pedido {
         this.precoTotal = precoTotal;
         this.itens = itens;
         this.dataPedido = dataPedido;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Long getId() {

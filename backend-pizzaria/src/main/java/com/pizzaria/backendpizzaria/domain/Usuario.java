@@ -45,6 +45,7 @@ public class Usuario {
     @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
     private Endereco endereco;
 
+
     public Long getIdUsuario() {
         return idUsuario;
     }

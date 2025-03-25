@@ -1,10 +1,8 @@
 package com.pizzaria.backendpizzaria.service;
+
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Produto;
-import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class ProdutoService {
 
     @Autowired
