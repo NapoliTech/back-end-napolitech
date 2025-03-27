@@ -7,7 +7,7 @@ import com.pizzaria.backendpizzaria.domain.Produto;
 import com.pizzaria.backendpizzaria.domain.ItemPedido;
 import com.pizzaria.backendpizzaria.domain.Pedido;
 import com.pizzaria.backendpizzaria.domain.Usuario;
-import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
+import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
 import com.pizzaria.backendpizzaria.repository.PedidoRepository;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;

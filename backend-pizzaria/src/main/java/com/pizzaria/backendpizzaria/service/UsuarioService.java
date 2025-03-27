@@ -4,7 +4,7 @@ import com.pizzaria.backendpizzaria.config.JwtUtil;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
-import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
+import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

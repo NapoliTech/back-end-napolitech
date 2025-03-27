@@ -1,5 +1,5 @@
 package com.pizzaria.backendpizzaria.config;
-import com.pizzaria.backendpizzaria.infra.Exception.ValidationException;
+import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
