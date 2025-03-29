@@ -1,13 +1,12 @@
 package com.pizzaria.backendpizzaria.service;
 
+import com.pizzaria.backendpizzaria.domain.*;
+import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ItemPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
-import com.pizzaria.backendpizzaria.domain.Produto;
-import com.pizzaria.backendpizzaria.domain.ItemPedido;
-import com.pizzaria.backendpizzaria.domain.Pedido;
-import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
+import com.pizzaria.backendpizzaria.repository.EnderecoRepository;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
 import com.pizzaria.backendpizzaria.repository.PedidoRepository;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
@@ -29,6 +28,8 @@ public class PedidoService {
     private ProdutoRepository produtoRepository;
     @Autowired
     private UsuarioRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
 
     @Transactional
@@ -47,6 +48,27 @@ public class PedidoService {
         List<ItemPedido> itens = new ArrayList<>();
         double valorTotal = 0.0;
 
+        if (pedidoDTO.getEndereco() != null) {
+            if (pedidoDTO.getEndereco().getId() != null) {
+                Endereco endereco = enderecoRepository.findById(pedidoDTO.getEndereco().getId())
+                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
+                pedido.setEndereco(endereco);
+            } else {
+                Endereco novoEndereco = new Endereco();
+                novoEndereco.setRua(pedidoDTO.getEndereco().getRua());
+                novoEndereco.setNumero(pedidoDTO.getEndereco().getNumero());
+                novoEndereco.setBairro(pedidoDTO.getEndereco().getBairro());
+                novoEndereco.setComplemento(pedidoDTO.getEndereco().getComplemento());
+                novoEndereco.setCidade(pedidoDTO.getEndereco().getCidade());
+                novoEndereco.setEstado(pedidoDTO.getEndereco().getEstado());
+                novoEndereco.setCep(pedidoDTO.getEndereco().getCep());
+
+                novoEndereco = enderecoRepository.save(novoEndereco);
+                pedido.setEndereco(novoEndereco);
+            }
+        }
+
+
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
             if (itemDTO.getProduto() == null) {
                 throw new ValidationException("Produto ID não pode ser nulo.");
@@ -60,7 +82,7 @@ public class PedidoService {
             item.setQuantidade(itemDTO.getQuantidade());
             item.setPrecoTotal(produto.getPreco() * itemDTO.getQuantidade());
             item.setPedido(pedido);
-            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - item.getQuantidade() );
+            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - item.getQuantidade());
 
             produtoRepository.save(produto);
             itens.add(item);

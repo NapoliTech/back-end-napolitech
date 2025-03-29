@@ -23,26 +23,27 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-        try {
-            Pedido pedidoCriado = pedidoService.criarPedido(pedidoDTO);
+        @PostMapping
+        public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
+            try {
+                Pedido pedidoCriado = pedidoService.criarPedido(pedidoDTO);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("pedidoId", pedidoCriado.getId());
-            response.put("valorTotal", pedidoCriado.getPrecoTotal());
-            response.put("itens", pedidoCriado.getItens());
-            response.put("nomeCliente",  pedidoCriado.getCliente().getNome());
-            response.put("telefone",  pedidoCriado.getCliente().getTelefone());
-            response.put("mensagem", "Pedido criado com sucesso!");
-            response.put("status", pedidoCriado.getStatusPedido());
+                Map<String, Object> response = new HashMap<>();
+                response.put("pedidoId", pedidoCriado.getId());
+                response.put("valorTotal", pedidoCriado.getPrecoTotal());
+                response.put("itens", pedidoCriado.getItens());
+                response.put("nomeCliente",  pedidoCriado.getCliente().getNome());
+                response.put("telefone",  pedidoCriado.getCliente().getTelefone());
+                response.put("mensagem", "Pedido criado com sucesso!");
+                response.put("status", pedidoCriado.getStatusPedido());
+                response.put("endereço", pedidoCriado.getEndereco());
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("erro", "Erro ao criar pedido: " + e.getMessage()));
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Map.of("erro", "Erro ao criar pedido: " + e.getMessage()));
+            }
         }
-    }
 
     @PutMapping("/{id}/status")
     public ResponseEntity<Pedido> atualizarStatusPedido(@PathVariable Long id, @RequestBody AtualizarStatusPedidoDTO statusPedido) {
