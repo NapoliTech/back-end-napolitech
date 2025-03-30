@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./backend-pizzaria
+    ports:
+      - "8080:8080"
+    networks:
+      - napolitech-network
+    depends_on:
+      - database
+    environment:
+      DB_URL: jdbc:mysql://database:3306/test_backend_pi?createDatabaseIfNotExist=true
+      DB_USERNAME: root
+      DB_PASSWORD: napolitech100
+
+  database:
+    image: mysql:8.0
+    container_name: mysql_database
+    ports:
+      - "3306:3306"
+    networks:
+      - napolitech-network
+    environment:
+      MYSQL_ROOT_PASSWORD: napolitech100
+      MYSQL_DATABASE: test_backend_pi
+
+  frontend:
+    build:
+      context: ./front-end-napolitech
+    ports:
+      - "80:3000"
+    networks:
+      - napolitech-network
+    depends_on:
+      - backend
+
+networks:
+  napolitech-network:
