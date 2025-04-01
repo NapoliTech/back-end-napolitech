@@ -48,25 +48,12 @@ public class PedidoService {
         List<ItemPedido> itens = new ArrayList<>();
         double valorTotal = 0.0;
 
-        if (pedidoDTO.getEndereco() != null) {
-            if (pedidoDTO.getEndereco().getId() != null) {
-                Endereco endereco = enderecoRepository.findById(pedidoDTO.getEndereco().getId())
-                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
-                pedido.setEndereco(endereco);
-            } else {
-                Endereco novoEndereco = new Endereco();
-                novoEndereco.setRua(pedidoDTO.getEndereco().getRua());
-                novoEndereco.setNumero(pedidoDTO.getEndereco().getNumero());
-                novoEndereco.setBairro(pedidoDTO.getEndereco().getBairro());
-                novoEndereco.setComplemento(pedidoDTO.getEndereco().getComplemento());
-                novoEndereco.setCidade(pedidoDTO.getEndereco().getCidade());
-                novoEndereco.setEstado(pedidoDTO.getEndereco().getEstado());
-                novoEndereco.setCep(pedidoDTO.getEndereco().getCep());
-
-                novoEndereco = enderecoRepository.save(novoEndereco);
-                pedido.setEndereco(novoEndereco);
-            }
+        if (pedidoDTO.getEndereco() == null || pedidoDTO.getEndereco().getId() == null) {
+            throw new RuntimeException("Endereço ID não pode ser nulo. O endereço deve estar previamente cadastrado.");
         }
+
+        Endereco endereco = enderecoRepository.findById(pedidoDTO.getEndereco().getId().intValue())
+                .orElseThrow(() -> new RuntimeException("Endereço com ID " + pedidoDTO.getEndereco().getId() + " não encontrado"));
 
 
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
@@ -95,6 +82,7 @@ public class PedidoService {
         pedido.setCliente(cliente);
         pedido.setItens(itens);
         pedido.setPrecoTotal(valorTotal);
+        pedido.setEndereco(endereco);
         pedidoRepository.save(pedido);
 
         return pedido;
