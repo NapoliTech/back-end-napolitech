@@ -31,7 +31,6 @@ public class PedidoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-
     @Transactional
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
         if (pedidoDTO.getClienteId() == null) {
@@ -43,18 +42,16 @@ public class PedidoService {
 
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
-        pedido = pedidoRepository.save(pedido);
 
-        List<ItemPedido> itens = new ArrayList<>();
-        double valorTotal = 0.0;
-
-        if (pedidoDTO.getEndereco() == null || pedidoDTO.getEndereco().getId() == null) {
+        if (pedidoDTO.getEnderecoId() == null) {
             throw new RuntimeException("Endereço ID não pode ser nulo. O endereço deve estar previamente cadastrado.");
         }
 
-        Endereco endereco = enderecoRepository.findById(pedidoDTO.getEndereco().getId().intValue())
-                .orElseThrow(() -> new RuntimeException("Endereço com ID " + pedidoDTO.getEndereco().getId() + " não encontrado"));
+        Endereco endereco = enderecoRepository.findById(pedidoDTO.getEnderecoId().intValue())
+                .orElseThrow(() -> new RuntimeException("Endereço com ID " + pedidoDTO.getEnderecoId() + " não encontrado"));
 
+        List<ItemPedido> itens = new ArrayList<>();
+        double valorTotal = 0.0;
 
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
             if (itemDTO.getProduto() == null) {

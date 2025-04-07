@@ -86,12 +86,15 @@ public class Endereco {
         this.estado = estado;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getUsuarioId() {
+        return usuario != null ? usuario.getIdUsuario() : null;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioId(Long idUsuario) {
+        if (this.usuario == null) {
+            this.usuario = new Usuario();
+        }
+        this.usuario.setIdUsuario(idUsuario);
     }
 
     public String getCep() {

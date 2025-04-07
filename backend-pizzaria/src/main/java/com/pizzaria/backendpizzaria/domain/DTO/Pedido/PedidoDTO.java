@@ -9,7 +9,7 @@ public class PedidoDTO {
     private String nomeCliente;
     private Double valorTotal;
     private List<ItemPedidoDTO> itens;
-    private EnderecoDTO endereco;  // Mantendo o campo de EnderecoDTO
+    private Long enderecoId;
     private String telefone;
     private StatusPedido statusPedido;
 
@@ -61,12 +61,12 @@ public class PedidoDTO {
         this.telefone = telefone;
     }
 
-    public EnderecoDTO getEndereco() {
-        return endereco;
+    public Long getEnderecoId() {
+        return enderecoId;
     }
 
-    public void setEndereco(EnderecoDTO endereco) {
-        this.endereco = endereco;
+    public void setEnderecoId(Long enderecoId) {
+        this.enderecoId = enderecoId;
     }
 
     public StatusPedido getStatusPedido() {

@@ -1,10 +1,10 @@
 package com.pizzaria.backendpizzaria.service;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
-import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Endereco;
-import com.pizzaria.backendpizzaria.domain.Produto;
+import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.repository.EnderecoRepository;
+import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,9 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository; // Adicionado para buscar usuário
+
     @Transactional
     public Endereco cadastrarEndereco(EnderecoDTO enderecoDTO) {
         Endereco endereco = new Endereco();
@@ -28,6 +31,17 @@ public class EnderecoService {
         endereco.setCidade(enderecoDTO.getCidade());
         endereco.setEstado(enderecoDTO.getEstado());
         endereco.setCep(enderecoDTO.getCep());
+
+        if (enderecoDTO.getUsuarioId() != null) {
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(enderecoDTO.getUsuarioId());
+            if (usuarioOptional.isPresent()) {
+                endereco.setUsuarioId(enderecoDTO.getUsuarioId());
+            } else {
+                throw new RuntimeException("Usuário não encontrado com ID: " + enderecoDTO.getUsuarioId());
+            }
+        } else {
+            throw new RuntimeException("Usuário não informado no cadastro do endereço!");
+        }
 
         return enderecoRepository.save(endereco);
     }
