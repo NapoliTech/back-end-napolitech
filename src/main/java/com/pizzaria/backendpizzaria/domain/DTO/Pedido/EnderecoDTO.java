@@ -2,7 +2,7 @@
 
     public class EnderecoDTO {
 
-        private Long id;
+        private Long enderecoId;
         private String rua;
         private String bairro;
         private int numero;
@@ -12,15 +12,13 @@
         private String cep;
         private Long usuarioId;
 
-        public EnderecoDTO() {
+
+        public Long getEnderecoId() {
+            return enderecoId;
         }
 
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
+        public void setEnderecoId(Long enderecoId) {
+            this.enderecoId = enderecoId;
         }
 
         public String getRua() {

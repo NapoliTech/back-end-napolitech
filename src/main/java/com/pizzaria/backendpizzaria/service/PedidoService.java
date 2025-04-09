@@ -31,7 +31,6 @@ public class PedidoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-
     @Transactional
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
         if (pedidoDTO.getClienteId() == null) {
@@ -43,31 +42,16 @@ public class PedidoService {
 
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
-        pedido = pedidoRepository.save(pedido);
+
+        if (pedidoDTO.getEnderecoId() == null) {
+            throw new RuntimeException("Endereço ID não pode ser nulo. O endereço deve estar previamente cadastrado.");
+        }
+
+        Endereco endereco = enderecoRepository.findById(pedidoDTO.getEnderecoId().intValue())
+                .orElseThrow(() -> new RuntimeException("Endereço com ID " + pedidoDTO.getEnderecoId() + " não encontrado"));
 
         List<ItemPedido> itens = new ArrayList<>();
         double valorTotal = 0.0;
-
-        if (pedidoDTO.getEndereco() != null) {
-            if (pedidoDTO.getEndereco().getId() != null) {
-                Endereco endereco = enderecoRepository.findById(pedidoDTO.getEndereco().getId())
-                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
-                pedido.setEndereco(endereco);
-            } else {
-                Endereco novoEndereco = new Endereco();
-                novoEndereco.setRua(pedidoDTO.getEndereco().getRua());
-                novoEndereco.setNumero(pedidoDTO.getEndereco().getNumero());
-                novoEndereco.setBairro(pedidoDTO.getEndereco().getBairro());
-                novoEndereco.setComplemento(pedidoDTO.getEndereco().getComplemento());
-                novoEndereco.setCidade(pedidoDTO.getEndereco().getCidade());
-                novoEndereco.setEstado(pedidoDTO.getEndereco().getEstado());
-                novoEndereco.setCep(pedidoDTO.getEndereco().getCep());
-
-                novoEndereco = enderecoRepository.save(novoEndereco);
-                pedido.setEndereco(novoEndereco);
-            }
-        }
-
 
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
             if (itemDTO.getProduto() == null) {
@@ -95,6 +79,7 @@ public class PedidoService {
         pedido.setCliente(cliente);
         pedido.setItens(itens);
         pedido.setPrecoTotal(valorTotal);
+        pedido.setEndereco(endereco);
         pedidoRepository.save(pedido);
 
         return pedido;
