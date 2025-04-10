@@ -11,7 +11,16 @@ public class PedidoDTO {
     private List<ItemPedidoDTO> itens;
     private Long enderecoId;
     private String telefone;
+    private String observacao;
     private StatusPedido statusPedido;
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 
     public Long getPedidoId() {
         return pedidoId;

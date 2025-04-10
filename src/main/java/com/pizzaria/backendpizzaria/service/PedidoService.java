@@ -43,12 +43,10 @@ public class PedidoService {
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
 
-        if (pedidoDTO.getEnderecoId() == null) {
-            throw new RuntimeException("Endereço ID não pode ser nulo. O endereço deve estar previamente cadastrado.");
+        Endereco endereco = cliente.getEndereco();
+        if (endereco == null) {
+            throw new ValidationException("O cliente não possui um endereço cadastrado. Por favor, cadastre um endereço.");
         }
-
-        Endereco endereco = enderecoRepository.findById(pedidoDTO.getEnderecoId().intValue())
-                .orElseThrow(() -> new RuntimeException("Endereço com ID " + pedidoDTO.getEnderecoId() + " não encontrado"));
 
         List<ItemPedido> itens = new ArrayList<>();
         double valorTotal = 0.0;
@@ -79,6 +77,7 @@ public class PedidoService {
         pedido.setCliente(cliente);
         pedido.setItens(itens);
         pedido.setPrecoTotal(valorTotal);
+        pedido.setObservacao(pedidoDTO.getObservacao());
         pedido.setEndereco(endereco);
         pedidoRepository.save(pedido);
 

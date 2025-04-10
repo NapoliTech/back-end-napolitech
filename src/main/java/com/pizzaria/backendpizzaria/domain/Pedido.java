@@ -30,6 +30,8 @@ public class Pedido {
 
     private Double precoTotal;
 
+    private String observacao;
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemPedido> itens = new ArrayList<>();
 
@@ -44,7 +46,7 @@ public class Pedido {
                 .sum();
     }
 
-    public Pedido(Long id, Usuario cliente, String nomeCliente, StatusPedido statusPedido, Double precoTotal, List<ItemPedido> itens, LocalDateTime dataPedido) {
+    public Pedido(Long id, Usuario cliente, String nomeCliente, StatusPedido statusPedido, Double precoTotal, List<ItemPedido> itens, LocalDateTime dataPedido, String observacao) {
         this.id = id;
         this.cliente = cliente;
         this.nomeCliente = nomeCliente;
@@ -52,6 +54,15 @@ public class Pedido {
         this.precoTotal = precoTotal;
         this.itens = itens;
         this.dataPedido = dataPedido;
+        this.observacao = observacao;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public Endereco getEndereco() {
