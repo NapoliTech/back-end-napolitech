@@ -2,7 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="app-gateway" />
+        <module name="app-server" />
+      </profile>
       <profile name="Annotation profile for backend-pizzaria" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -10,17 +16,15 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="backend-pizzaria (1)" />
+        <module name="backend-pizzaria" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="backend-pizzaria" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="app-gateway" options="-parameters" />
+      <module name="app-server" options="-parameters" />
       <module name="backend-pizzaria" options="-parameters" />
-      <module name="backend-pizzaria (1)" options="-parameters" />
     </option>
   </component>
 </project>
