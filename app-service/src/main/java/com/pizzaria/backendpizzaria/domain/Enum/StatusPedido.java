@@ -1,7 +1,7 @@
 package com.pizzaria.backendpizzaria.domain.Enum;
 
 public enum StatusPedido {
-    CRIADO,
+    RECEBIDO,
     EM_PREPARO,
     ENTREGUE,
     ENCERRADO,

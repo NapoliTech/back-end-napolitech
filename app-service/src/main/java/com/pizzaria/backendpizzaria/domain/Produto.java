@@ -16,6 +16,8 @@ public class Produto {
 
     private Integer quantidadeEstoque;
 
+    private String ingredientes;
+
     public Long getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class Produto {
 
     public void setQuantidadeEstoque(Integer quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
 }
 

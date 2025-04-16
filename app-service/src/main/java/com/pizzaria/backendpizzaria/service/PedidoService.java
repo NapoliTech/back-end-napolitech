@@ -71,7 +71,7 @@ public class PedidoService {
             valorTotal += item.getPrecoTotal();
         }
 
-        pedido.setStatusPedido(StatusPedido.CRIADO);
+        pedido.setStatusPedido(StatusPedido.RECEBIDO);
         pedido.setNomeCliente(cliente.getNome());
         pedido.setDataPedido(LocalDateTime.now());
         pedido.setCliente(cliente);

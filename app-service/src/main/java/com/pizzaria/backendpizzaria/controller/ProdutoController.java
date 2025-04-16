@@ -31,6 +31,7 @@ public class ProdutoController {
             response.put("nome", produtoCriado.getNome());
             response.put("preco", produtoCriado.getPreco());
             response.put("quantidade", produtoCriado.getQuantidadeEstoque());
+            response.put("ingredientes", produtoCriado.getIngredientes());
             response.put("mensagem", "Produto cadastrado com sucesso!");
 
             return ResponseEntity.status(HttpStatus.CREATED).body(response);

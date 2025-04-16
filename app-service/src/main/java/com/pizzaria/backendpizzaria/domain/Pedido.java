@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pizzaria.backendpizzaria.domain.Enum.StatusPedido.CRIADO;
+import static com.pizzaria.backendpizzaria.domain.Enum.StatusPedido.RECEBIDO;
 
 @Entity
 @Table(name = "pedidos")
@@ -50,7 +50,7 @@ public class Pedido {
         this.id = id;
         this.cliente = cliente;
         this.nomeCliente = nomeCliente;
-        this.statusPedido = CRIADO;
+        this.statusPedido = RECEBIDO;
         this.precoTotal = precoTotal;
         this.itens = itens;
         this.dataPedido = dataPedido;

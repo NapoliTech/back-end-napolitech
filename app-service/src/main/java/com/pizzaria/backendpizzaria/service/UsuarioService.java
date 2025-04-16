@@ -73,6 +73,44 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    @Transactional
+    public Usuario registroAtendente(UsuarioRegistroDTO usuarioDTO) {
+        validarCampos(usuarioDTO);
+        validarCPF(usuarioDTO.getCpf());
+        validarTelefone(usuarioDTO.getTelefone());
+        Usuario usuario = new Usuario();
+
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setCpf(usuarioDTO.getCpf());
+        usuario.setDataNasc(usuarioDTO.getDataNasc());
+        usuario.setTipoUsuario("ATENDENTE");
+        usuario.setTelefone(usuarioDTO.getTelefone());
+        usuario.setPedidos(0L);
+
+        return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public Usuario registroAdmin(UsuarioRegistroDTO usuarioDTO) {
+        validarCampos(usuarioDTO);
+        validarCPF(usuarioDTO.getCpf());
+        validarTelefone(usuarioDTO.getTelefone());
+        Usuario usuario = new Usuario();
+
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setCpf(usuarioDTO.getCpf());
+        usuario.setDataNasc(usuarioDTO.getDataNasc());
+        usuario.setTipoUsuario("ADMINISTRADOR");
+        usuario.setTelefone(usuarioDTO.getTelefone());
+        usuario.setPedidos(0L);
+
+        return usuarioRepository.save(usuario);
+    }
+
     public String loginUsuario(String email, String senha) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(email);
         if (optionalUsuario.isPresent()) {

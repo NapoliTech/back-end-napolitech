@@ -4,6 +4,15 @@ public class ProdutoDTO {
     private String nome;
     private Double preco;
     private Integer quantidade;
+    private String ingredientes;
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
+    }
 
     public Double getPreco() {
         return preco;

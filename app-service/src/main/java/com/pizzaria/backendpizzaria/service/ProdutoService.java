@@ -22,6 +22,7 @@ public class ProdutoService {
         produto.setNome(produtoDTO.getNome());
         produto.setPreco(produtoDTO.getPreco());
         produto.setQuantidadeEstoque(produtoDTO.getQuantidade());
+        produto.setIngredientes(produtoDTO.getIngredientes());
 
         return produtoRepository.save(produto);
     }
