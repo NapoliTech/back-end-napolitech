@@ -22,7 +22,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/resources/**", "/h2-console", "/api/**", "/**").permitAll()
                         .anyRequest().authenticated()
-                );
+
+                ).oauth2Login(Customizer.withDefaults());
+
         return http.build();
     }
 
