@@ -5,12 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bfdfd330-fa7b-4a2a-876e-be5957a25adc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app-server/src/main/resources/banner.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-service/src/main/resources/banner.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/domain/DTO/Pedido/ItemPedidoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/domain/DTO/Pedido/ItemPedidoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/src/main/java/com/napolitech/appgateway/AppGatewayApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-gateway/src/test/java/com/napolitech/appgateway/AppGatewayApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/src/main/java/com/napolitech/appserver/AppServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-server/src/test/java/com/napolitech/appserver/AppServerApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/BackendPizzariaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/BackendPizzariaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/src/main/java/com/pizzaria/backendpizzaria/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-service/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app-service/src/main/resources/application-dev.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,32 +70,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.AppGatewayApplication.executor": "Run",
-    "Spring Boot.AppServerApplication.executor": "Run",
-    "Spring Boot.BackendPizzariaApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/LowCost/Documents/back-end-napolitech/app-gateway/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.configurations.included.in.services": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AppGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AppServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.BackendPizzariaApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LowCost/Documents/back-end-napolitech/app-gateway/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\LowCost\Documents\back-end-napolitech\app-gateway\src\main\resources" />
@@ -94,7 +115,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AppServerApplication">
+  <component name="RunManager">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -125,26 +146,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="app-gateway" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.napolitech.appgateway.AppGatewayApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.napolitech.appgateway.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="app-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.napolitech.appserver.AppServerApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BackendPizzariaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="backend-pizzaria" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.pizzaria.backendpizzaria.BackendPizzariaApplication" />
@@ -152,11 +153,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.AppGatewayApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
