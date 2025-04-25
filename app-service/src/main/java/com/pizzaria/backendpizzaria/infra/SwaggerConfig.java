@@ -15,15 +15,15 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Documentação da API da NapoliTech")
-                        .description("Esta é a documentação detalhada da API para o backend do projeto de extensão da faculdade. Inclui informações dos endpoints e exemplos.")
-                        .version("1.0.0")
+                        .title("API Napolitech - Documentação Oficial")
+                        .description("Esta API é parte do projeto Napolitech, desenvolvido com Spring Boot e MySQL. Aqui você encontrará detalhes dos endpoints e exemplos de uso.")
+                        .version("1.0.1")
                         .contact(new Contact()
-                                .name("pedrohpiress")
-                                .url("https://www.pizzariabonari.com")
-                                .email("pedro.souza@v8.tech"))
+                                .name("Equipe Napolitech")
+                                .url("https://github.com/NapoliTech")
+                                .email("napolitech.dev@gmail.com"))
                         .license(new License()
-                                .name("Licença MIT")
+                                .name("MIT")
                                 .url("https://opensource.org/licenses/MIT")));
     }
 }
