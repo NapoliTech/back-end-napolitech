@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
-        <option value="$PROJECT_DIR$/app-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/app-service/pom.xml" />
-        <option value="$PROJECT_DIR$/app-server/pom.xml" />
-      </list>
+  <component name="MaterialThemeProjectNewConfig">
+    <option name="metadata">
+      <MTProjectMetadataState>
+        <option name="userId" value="15f4e8e4:1958cd7946c:-7ffd" />
+      </MTProjectMetadataState>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/app-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/app-server/pom.xml" />
-      </set>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="corretto-21" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
