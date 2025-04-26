@@ -5,6 +5,7 @@ import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ItemPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
+import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
 import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.EnderecoRepository;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
@@ -37,6 +38,7 @@ public class PedidoService {
             throw new RuntimeException("Cliente ID não pode ser nulo.");
         }
 
+
         Usuario cliente = clienteRepository.findById(pedidoDTO.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente com ID " + pedidoDTO.getClienteId() + " não encontrado"));
 
@@ -52,23 +54,66 @@ public class PedidoService {
         double valorTotal = 0.0;
 
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
-            if (itemDTO.getProduto() == null) {
-                throw new ValidationException("Produto ID não pode ser nulo.");
+            if (itemDTO.getProduto() == null || itemDTO.getProduto().isEmpty()) {
+                throw new ValidationException("Produto ID não pode ser nulo ou vazio.");
             }
 
-            Produto produto = produtoRepository.findById(Math.toIntExact(Long.parseLong(itemDTO.getProduto())))
-                    .orElseThrow(() -> new ValidationException("Produto com ID " + itemDTO.getProduto() + " não encontrado"));
+            List<Produto> produtos = new ArrayList<>();
+            for (Integer produtoId : itemDTO.getProduto()) {
+                Produto produto = produtoRepository.findById(produtoId)
+                        .orElseThrow(() -> new ValidationException("Produto com ID " + produtoId + " não encontrado"));
+                produtos.add(produto);
+            }
 
-            ItemPedido item = new ItemPedido();
-            item.setProduto(produto);
-            item.setQuantidade(itemDTO.getQuantidade());
-            item.setPrecoTotal(produto.getPreco() * itemDTO.getQuantidade());
-            item.setPedido(pedido);
-            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - item.getQuantidade());
+            try {
+                TamanhoPizza.valueOf(itemDTO.getTamanhoPizza().name());
+            } catch (IllegalArgumentException e) {
+                throw new ValidationException("Tamanho de pizza inválido: " + itemDTO.getTamanhoPizza());
+            }
 
-            produtoRepository.save(produto);
-            itens.add(item);
-            valorTotal += item.getPrecoTotal();
+            if (itemDTO.getTamanhoPizza() == TamanhoPizza.MEIO_A_MEIO) {
+                if (produtos.size() != 2) {
+                    throw new ValidationException("Pizzas MEIO_A_MEIO devem conter exatamente 2 sabores.");
+                }
+
+                for (Produto produto : produtos) {
+                    ItemPedido item = new ItemPedido();
+                    item.setQuantidade(itemDTO.getQuantidade());
+                    item.setTamanhoPizza(itemDTO.getTamanhoPizza());
+                    item.setProduto(produto);
+
+                    double precoBase = produto.getPreco() / 2;
+                    item.setPrecoTotal(precoBase * itemDTO.getQuantidade());
+                    item.setPedido(pedido);
+
+                    produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - item.getQuantidade());
+                    produtoRepository.save(produto);
+
+                    itens.add(item);
+                    valorTotal += item.getPrecoTotal();
+                }
+            } else {
+                ItemPedido item = new ItemPedido();
+                item.setQuantidade(itemDTO.getQuantidade());
+                item.setTamanhoPizza(itemDTO.getTamanhoPizza());
+                item.setProduto(produtos.get(0));
+
+                double precoBase = produtos.stream().mapToDouble(Produto::getPreco).average().orElse(0.0);
+                if (itemDTO.getTamanhoPizza() == TamanhoPizza.BROTO) {
+                    precoBase /= 2;
+                } else if (itemDTO.getTamanhoPizza() == TamanhoPizza.TREM) {
+                    precoBase *= 3;
+                }
+
+                item.setPrecoTotal(precoBase * itemDTO.getQuantidade());
+                item.setPedido(pedido);
+
+                produtos.get(0).setQuantidadeEstoque(produtos.get(0).getQuantidadeEstoque() - item.getQuantidade());
+                produtoRepository.save(produtos.get(0));
+
+                itens.add(item);
+                valorTotal += item.getPrecoTotal();
+            }
         }
 
         pedido.setStatusPedido(StatusPedido.RECEBIDO);

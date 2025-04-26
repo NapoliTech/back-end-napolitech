@@ -1,5 +1,6 @@
 package com.pizzaria.backendpizzaria.domain;
 
+import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,16 @@ public class Produto {
     private Integer quantidadeEstoque;
 
     private String ingredientes;
+
+    private CategoriaProduto categoriaProduto;
+
+    public CategoriaProduto getCategoriaProduto() {
+        return categoriaProduto;
+    }
+
+    public void setCategoriaProduto(CategoriaProduto categoriaProduto) {
+        this.categoriaProduto = categoriaProduto;
+    }
 
     public Long getId() {
         return id;

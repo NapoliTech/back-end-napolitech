@@ -1,10 +1,21 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
 
+import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
+
 public class ProdutoDTO {
     private String nome;
     private Double preco;
     private Integer quantidade;
     private String ingredientes;
+    private CategoriaProduto categoriaProduto;
+
+    public CategoriaProduto getCategoriaProduto() {
+        return categoriaProduto;
+    }
+
+    public void setCategoriaProduto(CategoriaProduto categoriaProduto) {
+        this.categoriaProduto = categoriaProduto;
+    }
 
     public String getIngredientes() {
         return ingredientes;

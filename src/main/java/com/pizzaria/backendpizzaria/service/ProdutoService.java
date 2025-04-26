@@ -1,6 +1,8 @@
 package com.pizzaria.backendpizzaria.service;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
+import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
+import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
 import com.pizzaria.backendpizzaria.domain.Produto;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class ProdutoService {
         produto.setPreco(produtoDTO.getPreco());
         produto.setQuantidadeEstoque(produtoDTO.getQuantidade());
         produto.setIngredientes(produtoDTO.getIngredientes());
+
+        try {
+            produto.setCategoriaProduto(CategoriaProduto.valueOf(produtoDTO.getCategoriaProduto().toString().toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Categoria inválida: " + produtoDTO.getCategoriaProduto());
+        }
 
         return produtoRepository.save(produto);
     }

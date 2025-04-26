@@ -1,6 +1,7 @@
 package com.pizzaria.backendpizzaria.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +21,17 @@ public class ItemPedido {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+
+    @Enumerated(EnumType.STRING)
+    private TamanhoPizza tamanhoPizza;
+
+    public TamanhoPizza getTamanhoPizza() {
+        return tamanhoPizza;
+    }
+
+    public void setTamanhoPizza(TamanhoPizza tamanhoPizza) {
+        this.tamanhoPizza = tamanhoPizza;
+    }
 
     private Double precoTotal;
 
