@@ -3,6 +3,7 @@ package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
 import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
 import com.pizzaria.backendpizzaria.domain.ItemPedido;
 import jakarta.persistence.EnumType;
@@ -17,6 +18,9 @@ public class ItemPedidoDTO {
     private Integer quantidade;
     @Enumerated(EnumType.STRING)
     private TamanhoPizza tamanhoPizza;
+    @Enumerated(EnumType.STRING)
+    private BordaRecheada bordaRecheada;
+
 
     public ItemPedidoDTO(ItemPedido item) {
         this.produto = Collections.singletonList(Integer.valueOf((item.getProduto() != null) ? item.getProduto().getNome() : "Produto Desconhecido"));
@@ -32,6 +36,14 @@ public class ItemPedidoDTO {
         this.produto = produto;
         this.quantidade = quantidade;
         this.tamanhoPizza = tamanhoPizza;
+    }
+
+    public BordaRecheada getBordaRecheada() {
+        return bordaRecheada;
+    }
+
+    public void setBordaRecheada(BordaRecheada bordaRecheada) {
+        this.bordaRecheada = bordaRecheada;
     }
 
     public ItemPedidoDTO() {

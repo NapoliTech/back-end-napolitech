@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "usuarios_cadastrados")
 public class Usuario {
@@ -32,8 +35,8 @@ public class Usuario {
     @NotBlank
     private String telefone;
 
-    @NotNull
-    private Long pedidos;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos = new ArrayList<>();
 
     @NotBlank
     private String dataNasc;
@@ -44,7 +47,6 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
     private Endereco endereco;
-
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -102,11 +104,11 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public Long getPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(Long pedidos) {
+    public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 

@@ -33,6 +33,7 @@ public class PedidoController {
             response.put("itens", pedidoCriado.getItens());
             response.put("nomeCliente", pedidoCriado.getCliente().getNome());
             response.put("telefone", pedidoCriado.getCliente().getTelefone());
+            response.put("tipoEntrega", pedidoCriado.getTipoEntrega());
             response.put("endereco", pedidoCriado.getCliente().getEndereco());
             response.put("observacao", pedidoCriado.getObservacao());
             response.put("status", pedidoCriado.getStatusPedido());

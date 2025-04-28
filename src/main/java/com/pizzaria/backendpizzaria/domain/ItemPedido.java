@@ -1,6 +1,7 @@
 package com.pizzaria.backendpizzaria.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
 import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
 import jakarta.persistence.*;
 
@@ -25,6 +26,11 @@ public class ItemPedido {
     @Enumerated(EnumType.STRING)
     private TamanhoPizza tamanhoPizza;
 
+    @Enumerated(EnumType.STRING)
+    private BordaRecheada bordaRecheada;
+
+    private Double precoTotal;
+
     public TamanhoPizza getTamanhoPizza() {
         return tamanhoPizza;
     }
@@ -33,7 +39,13 @@ public class ItemPedido {
         this.tamanhoPizza = tamanhoPizza;
     }
 
-    private Double precoTotal;
+    public BordaRecheada getBordaRecheada() {
+        return bordaRecheada;
+    }
+
+    public void setBordaRecheada(BordaRecheada bordaRecheada) {
+        this.bordaRecheada = bordaRecheada;
+    }
 
     public Long getId() {
         return id;

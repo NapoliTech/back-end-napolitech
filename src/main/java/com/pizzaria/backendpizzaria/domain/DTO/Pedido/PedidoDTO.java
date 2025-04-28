@@ -1,6 +1,9 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
 
+import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
+import com.pizzaria.backendpizzaria.domain.Enum.TipoEntrega;
+
 import java.util.List;
 
 public class PedidoDTO {
@@ -13,6 +16,24 @@ public class PedidoDTO {
     private String telefone;
     private String observacao;
     private StatusPedido statusPedido;
+    private TipoEntrega tipoEntrega;
+    private BordaRecheada bordaRecheada;
+
+    public TipoEntrega getTipoEntrega() {
+        return tipoEntrega;
+    }
+
+    public void setTipoEntrega(TipoEntrega tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
+    }
+
+    public BordaRecheada getBordaRecheada() {
+        return bordaRecheada;
+    }
+
+    public void setBordaRecheada(BordaRecheada bordaRecheada) {
+        this.bordaRecheada = bordaRecheada;
+    }
 
     public String getObservacao() {
         return observacao;

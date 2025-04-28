@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -68,7 +69,7 @@ public class UsuarioService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("USUARIO_COMUM");
         usuario.setTelefone(usuarioDTO.getTelefone());
-        usuario.setPedidos(0L);
+        usuario.setPedidos(List.of());
 
         return usuarioRepository.save(usuario);
     }
@@ -87,7 +88,6 @@ public class UsuarioService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("ATENDENTE");
         usuario.setTelefone(usuarioDTO.getTelefone());
-        usuario.setPedidos(0L);
 
         return usuarioRepository.save(usuario);
     }
@@ -106,7 +106,6 @@ public class UsuarioService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("ADMINISTRADOR");
         usuario.setTelefone(usuarioDTO.getTelefone());
-        usuario.setPedidos(0L);
 
         return usuarioRepository.save(usuario);
     }

@@ -65,6 +65,32 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecos);
     }
 
+    @PutMapping("/{usuarioId}/{enderecoId}")
+    public ResponseEntity<Map<String, Object>> atualizarEnderecoDeUsuario(
+            @PathVariable Long usuarioId,
+            @PathVariable Long enderecoId,
+            @RequestBody EnderecoDTO enderecoDTO) {
+        try {
+            Endereco enderecoAtualizado = enderecoService.atualizarEnderecoDeUsuario(usuarioId, enderecoId, enderecoDTO);
+G
+            Map<String, Object> response = new HashMap<>();
+            response.put("enderecoId", enderecoAtualizado.getId());
+            response.put("rua", enderecoAtualizado.getRua());
+            response.put("numero", enderecoAtualizado.getNumero());
+            response.put("bairro", enderecoAtualizado.getBairro());
+            response.put("complemento", enderecoAtualizado.getComplemento());
+            response.put("cidade", enderecoAtualizado.getCidade());
+            response.put("estado", enderecoAtualizado.getEstado());
+            response.put("cep", enderecoAtualizado.getCep());
+            response.put("mensagem", "Endereço atualizado com sucesso!");
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("erro", "Erro ao atualizar endereço: " + e.getMessage()));
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deletarEndereco(@PathVariable Integer id) {
         boolean deletado = enderecoService.deletarEndereco(id);

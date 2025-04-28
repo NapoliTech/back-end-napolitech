@@ -1,6 +1,7 @@
 package com.pizzaria.backendpizzaria.domain;
 
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
+import com.pizzaria.backendpizzaria.domain.Enum.TipoEntrega;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,9 @@ public class Pedido {
 
     private String observacao;
 
+    @Enumerated(EnumType.STRING)
+    private TipoEntrega tipoEntrega;
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemPedido> itens = new ArrayList<>();
 
@@ -55,6 +59,14 @@ public class Pedido {
         this.itens = itens;
         this.dataPedido = dataPedido;
         this.observacao = observacao;
+    }
+
+    public TipoEntrega getTipoEntrega() {
+        return tipoEntrega;
+    }
+
+    public void setTipoEntrega(TipoEntrega tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
     }
 
     public String getObservacao() {

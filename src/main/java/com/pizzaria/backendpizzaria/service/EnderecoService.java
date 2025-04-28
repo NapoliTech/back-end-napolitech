@@ -55,6 +55,26 @@ public class EnderecoService {
     }
 
     @Transactional
+    public Endereco atualizarEnderecoDeUsuario(Long usuarioId, Long enderecoId, EnderecoDTO enderecoDTO) {
+        Endereco endereco = enderecoRepository.findById(Math.toIntExact(enderecoId))
+                .orElseThrow(() -> new RuntimeException("Endereço com ID " + enderecoId + " não encontrado"));
+
+        if (!endereco.getUsuarioId().equals(usuarioId)) {
+            throw new RuntimeException("O endereço não pertence ao usuário com ID " + usuarioId);
+        }
+
+        endereco.setRua(enderecoDTO.getRua());
+        endereco.setNumero(enderecoDTO.getNumero());
+        endereco.setBairro(enderecoDTO.getBairro());
+        endereco.setComplemento(enderecoDTO.getComplemento());
+        endereco.setCidade(enderecoDTO.getCidade());
+        endereco.setEstado(enderecoDTO.getEstado());
+        endereco.setCep(enderecoDTO.getCep());
+
+        return enderecoRepository.save(endereco);
+    }
+
+    @Transactional
     public boolean deletarEndereco(Integer id) {
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
 
