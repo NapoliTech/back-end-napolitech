@@ -35,8 +35,8 @@ public class Usuario {
     @NotBlank
     private String telefone;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pedido> pedidos = new ArrayList<>();
+    @NotNull
+    private Long pedidos;
 
     @NotBlank
     private String dataNasc;
@@ -104,11 +104,11 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public List<Pedido> getPedidos() {
+    public Long getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List<Pedido> pedidos) {
+    public void setPedidos(Long pedidos) {
         this.pedidos = pedidos;
     }
 

@@ -1,5 +1,6 @@
 package com.pizzaria.backendpizzaria.controller;
 
+import com.pizzaria.backendpizzaria.domain.DTO.Login.ClienteResumoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
@@ -52,13 +53,36 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> listarPedidoPorId(
-            @PathVariable Long id
-    ){
-        Optional<Pedido> pedido = pedidoService.listarPedidoPorId(id);
+    public ResponseEntity<Map<String, Object>> listarPedidoPorId(@PathVariable("id") Long id) {
+        Optional<Pedido> pedidoOptional = pedidoService.listarPedidoPorId(id);
+
+        if (pedidoOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("erro", "Pedido não encontrado"));
+        }
+
+        Pedido pedido = pedidoOptional.get();
+
+        ClienteResumoDTO clienteResumo = new ClienteResumoDTO(
+                pedido.getCliente().getNome(),
+                pedido.getCliente().getEmail(),
+                pedido.getCliente().getTelefone(),
+                Math.toIntExact(pedido.getCliente().getPedidos())
+        );
+
         Map<String, Object> response = new HashMap<>();
-        response.put("pedido", pedido);
-        return  ResponseEntity.status(HttpStatus.OK).body(response);
+        response.put("id", pedido.getId());
+        response.put("cliente", clienteResumo);
+        response.put("endereco", pedido.getEndereco());
+        response.put("nomeCliente", pedido.getNomeCliente());
+        response.put("statusPedido", pedido.getStatusPedido());
+        response.put("precoTotal", pedido.getPrecoTotal());
+        response.put("observacao", pedido.getObservacao());
+        response.put("tipoEntrega", pedido.getTipoEntrega());
+        response.put("itens", pedido.getItens());
+        response.put("dataPedido", pedido.getDataPedido());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping

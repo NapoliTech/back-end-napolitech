@@ -22,7 +22,8 @@ public class Pedido {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Usuario cliente;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
 
     private String nomeCliente;

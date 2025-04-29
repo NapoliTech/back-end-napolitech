@@ -72,7 +72,7 @@ public class EnderecoController {
             @RequestBody EnderecoDTO enderecoDTO) {
         try {
             Endereco enderecoAtualizado = enderecoService.atualizarEnderecoDeUsuario(usuarioId, enderecoId, enderecoDTO);
-G
+
             Map<String, Object> response = new HashMap<>();
             response.put("enderecoId", enderecoAtualizado.getId());
             response.put("rua", enderecoAtualizado.getRua());

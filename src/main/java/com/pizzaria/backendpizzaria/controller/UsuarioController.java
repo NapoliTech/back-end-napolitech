@@ -76,7 +76,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarUsuarioPorId(
-            @PathVariable Long id
+            @PathVariable("id") Long id
     ){
         Optional<Usuario> usuario = usuarioService.listarUsuariosPorId(id);
         Map<String, Object> response = new HashMap<>();

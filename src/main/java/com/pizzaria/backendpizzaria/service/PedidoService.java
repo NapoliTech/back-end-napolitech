@@ -39,6 +39,7 @@ public class PedidoService {
         validarPedidoDTO(pedidoDTO);
 
         Usuario cliente = buscarCliente(pedidoDTO.getClienteId());
+        cliente.setPedidos(+1L);
         validarEnderecoCliente(cliente);
 
         Pedido pedido = inicializarPedido(pedidoDTO, cliente);

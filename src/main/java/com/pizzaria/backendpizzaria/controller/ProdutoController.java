@@ -44,7 +44,7 @@ public class ProdutoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarProdutosPorId(
-            @PathVariable Integer id
+            @PathVariable("id") Integer id
     ){
         Optional<Produto> produto = produtoService.listarProdutoPorId(id);
         Map<String, Object> response = new HashMap<>();

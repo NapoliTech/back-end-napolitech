@@ -69,7 +69,7 @@ public class UsuarioService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("USUARIO_COMUM");
         usuario.setTelefone(usuarioDTO.getTelefone());
-        usuario.setPedidos(List.of());
+        usuario.setPedidos(0L);
 
         return usuarioRepository.save(usuario);
     }
