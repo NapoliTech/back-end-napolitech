@@ -1,32 +1,41 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Login;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Schema(description = "Dados para registro de um novo usuário.")
 public class UsuarioRegistroDTO {
 
+    @Schema(description = "Nome do usuário.", example = "João Silva", required = true)
     @NotBlank
     private String nome;
 
+    @Schema(description = "E-mail do usuário.", example = "joao.silva@exemplo.com", required = true)
     @NotBlank
     @Email
     private String email;
 
+    @Schema(description = "Data de nascimento do usuário.", example = "01/01/1990", required = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @NotNull
     private String dataNasc;
 
+    @Schema(description = "CPF do usuário.", example = "123.456.789-00", required = true)
     @NotBlank
     private String cpf;
 
+    @Schema(description = "Senha do usuário.", example = "senha123", required = true)
     @NotBlank
     private String senha;
 
+    @Schema(description = "Confirmação da senha do usuário.", example = "senha123", required = true)
     @NotBlank
     private String confirmarSenha;
 
+    @Schema(description = "Telefone do usuário.", example = "(11) 98765-4321", required = true)
     @NotBlank
     private String telefone;
 

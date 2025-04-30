@@ -6,6 +6,9 @@ import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioCreatedDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
 import com.pizzaria.backendpizzaria.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,13 +25,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Usuários", description = "Endpoints para gerenciamento de usuários.")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
+    @Operation(summary = "Registrar um novo usuário", description = "Registra um novo usuário no sistema.")
     @PostMapping("/cadastro")
-    public ResponseEntity<Map<String, Object>> registrarUsuario(@Validated @RequestBody UsuarioRegistroDTO usuarioDTO){
+    public ResponseEntity<Map<String, Object>> registrarUsuario(
+            @Validated @RequestBody UsuarioRegistroDTO usuarioDTO) {
         Usuario usuario = usuarioService.registro(usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuario));
@@ -37,8 +43,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Registrar um novo atendente", description = "Registra um novo atendente no sistema.")
     @PostMapping("/cadastro/atendente")
-    public ResponseEntity<Map<String, Object>> registrarAtendente(@Validated @RequestBody UsuarioRegistroDTO usuarioDTO){
+    public ResponseEntity<Map<String, Object>> registrarAtendente(
+            @Validated @RequestBody UsuarioRegistroDTO usuarioDTO) {
         Usuario usuario = usuarioService.registro(usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuario));
@@ -47,8 +55,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Registrar um novo administrador", description = "Registra um novo administrador no sistema.")
     @PostMapping("/cadastro/admin")
-    public ResponseEntity<Map<String, Object>> registrarAdmin(@Validated @RequestBody UsuarioRegistroDTO usuarioDTO){
+    public ResponseEntity<Map<String, Object>> registrarAdmin(
+            @Validated @RequestBody UsuarioRegistroDTO usuarioDTO) {
         Usuario usuario = usuarioService.registro(usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuario));
@@ -57,6 +67,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Realizar login", description = "Autentica um usuário e retorna um token.")
     @PostMapping("/login")
     public ResponseEntity<String> login(@Validated @RequestBody LoginDTO loginDTO) {
         try {
@@ -67,25 +78,32 @@ public class UsuarioController {
         }
     }
 
+    @Operation(summary = "Listar usuários", description = "Retorna uma lista paginada de usuários.")
     @GetMapping
     public ResponseEntity<Page<Usuario>> listarUsuarios(
+            @Parameter(description = "Configuração de paginação e ordenação.")
             @PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Usuario> usuarios = usuarioService.listarUsuarios(pageable);
         return ResponseEntity.ok(usuarios);
     }
 
+    @Operation(summary = "Buscar usuário por ID", description = "Retorna os detalhes de um usuário pelo ID.")
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarUsuarioPorId(
-            @PathVariable("id") Long id
-    ){
+            @Parameter(description = "ID do usuário a ser buscado.", example = "1")
+            @PathVariable("id") Long id) {
         Optional<Usuario> usuario = usuarioService.listarUsuariosPorId(id);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", usuario);
-        return  ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Atualizar usuário", description = "Atualiza os dados de um usuário existente.")
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> atualizarUsuario(@Validated @PathVariable Long id, @RequestBody UsuarioAtualizacaoDTO usuarioDTO) {
+    public ResponseEntity<Map<String, Object>> atualizarUsuario(
+            @Parameter(description = "ID do usuário a ser atualizado.", example = "1")
+            @Validated @PathVariable Long id,
+            @RequestBody UsuarioAtualizacaoDTO usuarioDTO) {
         Usuario usuarioParaAtuallizar = usuarioService.atualizarUsuario(id, usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuarioParaAtuallizar));
@@ -94,8 +112,11 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Deletar usuário", description = "Remove um usuário pelo ID.")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> deletarUsuario(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> deletarUsuario(
+            @Parameter(description = "ID do usuário a ser deletado.", example = "1")
+            @PathVariable Long id) {
         usuarioService.deletarUsuario(id);
 
         Map<String, Object> response = new HashMap<>();
@@ -103,5 +124,4 @@ public class UsuarioController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
 }

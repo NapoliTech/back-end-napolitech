@@ -1,21 +1,32 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Login;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Dados básicos de um usuário para operações gerais.")
 public class UsuarioDTO {
 
+    @Schema(description = "Identificador único do usuário.", example = "1", required = true)
     private Long idUsuario;
 
+    @Schema(description = "Nome do usuário.", example = "João Silva", required = true)
     private String nome;
 
+    @Schema(description = "E-mail do usuário.", example = "joao.silva@exemplo.com", required = true)
     private String email;
 
+    @Schema(description = "Senha do usuário.", example = "senha123", required = true)
     private String senha;
 
+    @Schema(description = "Confirmação da senha do usuário.", example = "senha123", required = true)
     private String confirmarSenha;
 
+    @Schema(description = "CPF do usuário.", example = "123.456.789-00", required = true)
     private String cpf;
 
+    @Schema(description = "Telefone do usuário.", example = "(11) 98765-4321", required = true)
     private String telefone;
 
+    @Schema(description = "Data de nascimento do usuário.", example = "01/01/1990", required = true)
     private String dataNasc;
 
     public Long getIdUsuario() {

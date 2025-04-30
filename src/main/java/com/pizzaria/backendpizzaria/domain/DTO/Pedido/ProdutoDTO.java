@@ -1,12 +1,24 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Pedido;
 
 import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Representa os dados de um produto no sistema.")
 public class ProdutoDTO {
+
+    @Schema(description = "Nome do produto.", example = "Pizza de Calabresa", required = true)
     private String nome;
+
+    @Schema(description = "Preço do produto.", example = "45.90", required = true)
     private Double preco;
+
+    @Schema(description = "Quantidade disponível no estoque.", example = "10", required = true)
     private Integer quantidade;
+
+    @Schema(description = "Ingredientes do produto.", example = "Calabresa, queijo, molho de tomate", required = true)
     private String ingredientes;
+
+    @Schema(description = "Categoria do produto.", example = "PIZZA", required = true)
     private CategoriaProduto categoriaProduto;
 
     public CategoriaProduto getCategoriaProduto() {

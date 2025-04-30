@@ -6,19 +6,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
 import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
 import com.pizzaria.backendpizzaria.domain.ItemPedido;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 import java.util.Collections;
 import java.util.List;
 
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "Representa os dados de um item de pedido no sistema.")
 public class ItemPedidoDTO {
+
+    @Schema(description = "Lista de IDs dos produtos no pedido.", example = "[1, 2]", required = true)
     private List<Integer> produto;
+
+    @Schema(description = "Quantidade do produto no pedido.", example = "2", required = true)
     private Integer quantidade;
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Tamanho da pizza.", example = "GRANDE", required = true)
     private TamanhoPizza tamanhoPizza;
+
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Tipo de borda recheada, se aplicável.", example = "CATUPIRY", required = false)
     private BordaRecheada bordaRecheada;
 
 

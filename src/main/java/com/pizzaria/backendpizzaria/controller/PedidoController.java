@@ -5,6 +5,9 @@ import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
 import com.pizzaria.backendpizzaria.service.PedidoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pedidos")
+@Tag(name = "Pedidos", description = "Endpoints para gerenciamento de pedidos.")
 public class PedidoController {
 
     private final PedidoService pedidoService;
@@ -24,8 +28,10 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
 
+    @Operation(summary = "Criar um novo pedido", description = "Registra um novo pedido no sistema.")
     @PostMapping
-    public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<Map<String, Object>> criarPedido(
+            @Parameter(description = "Dados do pedido a ser criado.") @RequestBody PedidoDTO pedidoDTO) {
         try {
             Pedido pedidoCriado = pedidoService.criarPedido(pedidoDTO);
             Map<String, Object> response = new HashMap<>();
@@ -46,14 +52,19 @@ public class PedidoController {
         }
     }
 
+    @Operation(summary = "Atualizar status do pedido", description = "Atualiza o status de um pedido existente.")
     @PutMapping("/{id}/status")
-    public ResponseEntity<Pedido> atualizarStatusPedido(@PathVariable Long id, @RequestBody AtualizarStatusPedidoDTO statusPedido) {
+    public ResponseEntity<Pedido> atualizarStatusPedido(
+            @Parameter(description = "ID do pedido a ser atualizado.", example = "1") @PathVariable Long id,
+            @Parameter(description = "Novo status do pedido.") @RequestBody AtualizarStatusPedidoDTO statusPedido) {
         Pedido pedidoAtualizado = pedidoService.atualizarStatusPedido(id, statusPedido.getStatus());
         return new ResponseEntity<>(pedidoAtualizado, HttpStatus.OK);
     }
 
+    @Operation(summary = "Buscar pedido por ID", description = "Retorna os detalhes de um pedido pelo ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> listarPedidoPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, Object>> listarPedidoPorId(
+            @Parameter(description = "ID do pedido a ser buscado.", example = "1") @PathVariable("id") Long id) {
         Optional<Pedido> pedidoOptional = pedidoService.listarPedidoPorId(id);
 
         if (pedidoOptional.isEmpty()) {
@@ -85,6 +96,7 @@ public class PedidoController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Listar todos os pedidos", description = "Retorna uma lista de todos os pedidos cadastrados.")
     @GetMapping
     public ResponseEntity<List<Pedido>> listarPedidos() {
         List<Pedido> pedidos = pedidoService.listarPedidos();

@@ -1,15 +1,32 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Login;
 
 import com.pizzaria.backendpizzaria.domain.Usuario;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Dados de um usuário criado no sistema.")
 public class UsuarioCreatedDTO {
-    Long id;
-    String nome;
-    String email;
-    String dataNasc;
-    String cpf;
-    String tipoUsuario;
-    String telefone;
+
+    @Schema(description = "Identificador único do usuário.", example = "1", required = true)
+    private Long id;
+
+    @Schema(description = "Nome do usuário.", example = "João Silva", required = true)
+    private String nome;
+
+    @Schema(description = "E-mail do usuário.", example = "joao.silva@exemplo.com", required = true)
+    private String email;
+
+    @Schema(description = "Data de nascimento do usuário.", example = "01/01/1990", required = true)
+    private String dataNasc;
+
+    @Schema(description = "CPF do usuário.", example = "123.456.789-00", required = true)
+    private String cpf;
+
+    @Schema(description = "Tipo de usuário.", example = "ADMIN", required = true)
+    private String tipoUsuario;
+
+    @Schema(description = "Telefone do usuário.", example = "(11) 98765-4321", required = true)
+    private String telefone;
+
 
     public UsuarioCreatedDTO(Usuario usuario) {
         this.id = usuario.getIdUsuario();

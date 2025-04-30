@@ -1,15 +1,16 @@
 package com.pizzaria.backendpizzaria.domain.DTO.Login;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+@Schema(description = "Representa os dados necessários para realizar login.")
 public class LoginDTO {
 
-    @NotBlank
-    @Email
+    @Schema(description = "E-mail do usuário.", example = "usuario@exemplo.com", required = true)
     private String email;
 
-    @NotBlank
+    @Schema(description = "Senha do usuário.", example = "senha123", required = true)
     private String senha;
 
     public LoginDTO() {

@@ -28,7 +28,7 @@ services:
     container_name: container_db
     restart: always
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: pizzaria_db
       MYSQL_USER: napolitech

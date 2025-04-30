@@ -4,6 +4,7 @@ import com.pizzaria.backendpizzaria.config.JwtUtil;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
+import com.pizzaria.backendpizzaria.domain.UsuarioDetailsAdapter;
 import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,6 +12,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +26,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -177,5 +181,12 @@ public class UsuarioService {
                 .orElseThrow(() -> new ValidationException("Usuário não encontrado"));
 
         usuarioRepository.delete(usuario);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
+        return new UsuarioDetailsAdapter(usuario);
     }
 }

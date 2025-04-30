@@ -14,7 +14,8 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
-public class JwtUtil {
+public class
+JwtUtil {
     @Autowired
     private UsuarioRepository usuarioRepository;
 

@@ -1,7 +1,11 @@
 package com.pizzaria.backendpizzaria.controller;
+
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Produto;
 import com.pizzaria.backendpizzaria.service.ProdutoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/produtos")
+@Tag(name = "Produtos", description = "Endpoints para gerenciamento de produtos.")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -21,8 +26,10 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
+    @Operation(summary = "Cadastrar um novo produto", description = "Registra um novo produto no sistema.")
     @PostMapping
-    public ResponseEntity<Map<String, Object>> cadastrarProduto(@RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<Map<String, Object>> cadastrarProduto(
+            @Parameter(description = "Dados do produto a ser cadastrado.") @RequestBody ProdutoDTO produtoDTO) {
         try {
             Produto produtoCriado = produtoService.cadastrarProduto(produtoDTO);
 
@@ -42,24 +49,27 @@ public class ProdutoController {
         }
     }
 
+    @Operation(summary = "Buscar produto por ID", description = "Retorna os detalhes de um produto pelo ID.")
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarProdutosPorId(
-            @PathVariable("id") Integer id
-    ){
+            @Parameter(description = "ID do produto a ser buscado.", example = "1") @PathVariable("id") Integer id) {
         Optional<Produto> produto = produtoService.listarProdutoPorId(id);
         Map<String, Object> response = new HashMap<>();
         response.put("produto", produto);
-        return  ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Listar todos os produtos", description = "Retorna uma lista de todos os produtos cadastrados.")
     @GetMapping
     public ResponseEntity<List<Produto>> listarProdutos() {
         List<Produto> produtos = produtoService.listarProdutos();
         return ResponseEntity.ok(produtos);
     }
 
+    @Operation(summary = "Deletar produto", description = "Remove um produto pelo ID.")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> deletarProduto(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> deletarProduto(
+            @Parameter(description = "ID do produto a ser deletado.", example = "1") @PathVariable Integer id) {
         boolean deletado = produtoService.deletarProduto(id);
 
         if (!deletado) {
