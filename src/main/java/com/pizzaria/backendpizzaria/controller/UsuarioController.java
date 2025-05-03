@@ -47,7 +47,7 @@ public class UsuarioController {
     @PostMapping("/cadastro/atendente")
     public ResponseEntity<Map<String, Object>> registrarAtendente(
             @Validated @RequestBody UsuarioRegistroDTO usuarioDTO) {
-        Usuario usuario = usuarioService.registro(usuarioDTO);
+        Usuario usuario = usuarioService.registroAtendente(usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuario));
         response.put("mensagem", "Atendente cadastrado com sucesso");
@@ -59,7 +59,7 @@ public class UsuarioController {
     @PostMapping("/cadastro/admin")
     public ResponseEntity<Map<String, Object>> registrarAdmin(
             @Validated @RequestBody UsuarioRegistroDTO usuarioDTO) {
-        Usuario usuario = usuarioService.registro(usuarioDTO);
+        Usuario usuario = usuarioService.registroAdmin(usuarioDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("usuario", new UsuarioCreatedDTO(usuario));
         response.put("mensagem", "Admin cadastrado com sucesso");
