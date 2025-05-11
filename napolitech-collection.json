@@ -1,17 +1,16 @@
 {
 	"info": {
-		"_postman_id": "dce6c303-ae10-424d-beee-55606f5260a8",
-		"name": "Projeto PI",
+		"_postman_id": "d6dbf096-af2e-41e4-9f17-c4f5bf758564",
+		"name": "Napolitech - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "44855872",
-		"_collection_link": "https://felipealbertim-2285677.postman.co/workspace/Pizzaria-API~7d9e2f57-adf5-453a-a613-3c683f896c95/collection/44855872-dce6c303-ae10-424d-beee-55606f5260a8?action=share&source=collection_link&creator=44855872"
+		"_exporter_id": "41346600"
 	},
 	"item": [
 		{
 			"name": "Usuário",
 			"item": [
 				{
-					"name": "Cadastrar Usuários",
+					"name": "Cadastro Usuario",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -41,7 +40,7 @@
 					"response": []
 				},
 				{
-					"name": "LoginUsuarios",
+					"name": "Login Usuário",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -387,37 +386,38 @@
 		},
 		{
 			"name": "Admin",
-			"item": []
-		},
-		{
-			"name": "Cadastrar Admin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRyb2JveGxpdmU2NDE0QGdtYWlsLmNvbSIsImlkIjoxLCJlbWFpbCI6InBlZHJvYm94bGl2ZTY0MTRAZ21haWwuY29tIiwibm9tZSI6InAgcGlyZXMiLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjIuMTIyLjExMi05OSIsImRhdGFOYXNjIjoiMjQvMDIvMjAwNiIsImlhdCI6MTc0NjkzMTc1OCwiZXhwIjoxNzQ3MDE4MTU4fQ.TjqEjjS6QhvSXQBfmHW4CE-KBDlPxzNYlzC4gP7dRoo"
-					}
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "",
-						"value": "",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"nome\": \"Pedro Pires\",\r\n  \"email\": \"piresaa@gmail.com\",\r\n  \"dataNasc\": \"20/02/1999\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"senha\": \"1234\",\r\n  \"confirmarSenha\": \"1234\",\r\n  \"telefone\": \"11993742094\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://localhost:8080/api/cadastro/admin"
-			},
-			"response": []
+			"item": [
+				{
+					"name": "Cadastrar Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRyb2JveGxpdmU2NDE0QGdtYWlsLmNvbSIsImlkIjoxLCJlbWFpbCI6InBlZHJvYm94bGl2ZTY0MTRAZ21haWwuY29tIiwibm9tZSI6InAgcGlyZXMiLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjIuMTIyLjExMi05OSIsImRhdGFOYXNjIjoiMjQvMDIvMjAwNiIsImlhdCI6MTc0NjkzMTc1OCwiZXhwIjoxNzQ3MDE4MTU4fQ.TjqEjjS6QhvSXQBfmHW4CE-KBDlPxzNYlzC4gP7dRoo"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Pedro Pires\",\r\n  \"email\": \"piresaa@gmail.com\",\r\n  \"dataNasc\": \"20/02/1999\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"senha\": \"1234\",\r\n  \"confirmarSenha\": \"1234\",\r\n  \"telefone\": \"11993742094\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/cadastro/admin"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

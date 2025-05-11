@@ -30,7 +30,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String requestPath = request.getServletPath();
 
-        if (requestPath.equals("/api/login") || requestPath.equals("/api/cadastro") || requestPath.equals("/swagger-ui/**")) {
+        if (
+                requestPath.startsWith("/swagger-ui") ||
+                        requestPath.startsWith("/v3/api-docs") ||
+                        requestPath.equals("/swagger-ui.html") ||
+                        requestPath.equals("/api/login") ||
+                        requestPath.equals("/api/cadastro")
+        ) {
             chain.doFilter(request, response);
             return;
         }
