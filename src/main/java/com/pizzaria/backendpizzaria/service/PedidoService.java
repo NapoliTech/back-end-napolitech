@@ -1,7 +1,6 @@
 package com.pizzaria.backendpizzaria.service;
 
 import com.pizzaria.backendpizzaria.domain.*;
-import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ItemPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
@@ -39,10 +38,9 @@ public class PedidoService {
         validarPedidoDTO(pedidoDTO);
 
         Usuario cliente = buscarCliente(pedidoDTO.getClienteId());
-        cliente.setPedidos(+1L);
-        validarEnderecoCliente(cliente);
+        Endereco endereco = buscarEndereco(pedidoDTO.getEnderecoId(), cliente);
 
-        Pedido pedido = inicializarPedido(pedidoDTO, cliente);
+        Pedido pedido = inicializarPedido(pedidoDTO, cliente, endereco);
         List<ItemPedido> itens = processarItensPedido(pedidoDTO, pedido);
 
         atualizarPedidoComItens(pedido, itens);
@@ -56,6 +54,12 @@ public class PedidoService {
         if (pedidoDTO.getClienteId() == null) {
             throw new RuntimeException("Cliente ID não pode ser nulo.");
         }
+        if (pedidoDTO.getEnderecoId() == null) {
+            throw new ValidationException("Endereço ID não pode ser nulo.");
+        }
+        if (pedidoDTO.getTipoEntrega() == null) {
+            throw new ValidationException("Tipo de entrega não pode ser nulo.");
+        }
     }
 
     private Usuario buscarCliente(Long clienteId) {
@@ -63,23 +67,20 @@ public class PedidoService {
                 .orElseThrow(() -> new RuntimeException("Cliente com ID " + clienteId + " não encontrado"));
     }
 
-    private void validarEnderecoCliente(Usuario cliente) {
-        if (cliente.getEndereco() == null) {
-            throw new ValidationException("O cliente não possui um endereço cadastrado. Por favor, cadastre um endereço.");
+    private Endereco buscarEndereco(Long enderecoId, Usuario cliente) {
+        Endereco endereco = enderecoRepository.findById(Math.toIntExact(enderecoId))
+                .orElseThrow(() -> new ValidationException("Endereço com ID " + enderecoId + " não encontrado"));
+        if (!endereco.getUsuarioId().equals(cliente.getIdUsuario())) {
+            throw new ValidationException("O endereço não pertence ao cliente informado.");
         }
+        return endereco;
     }
 
-    private void validarTipoEntrega(PedidoDTO pedidoDTO) {
-        if (pedidoDTO.getTipoEntrega() == null) {
-            throw new ValidationException("Tipo de entrega não pode ser nulo.");
-        }
-    }
-
-    private Pedido inicializarPedido(PedidoDTO pedidoDTO, Usuario cliente) {
+    private Pedido inicializarPedido(PedidoDTO pedidoDTO, Usuario cliente, Endereco endereco) {
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
         pedido.setObservacao(pedidoDTO.getObservacao());
-        pedido.setEndereco(cliente.getEndereco());
+        pedido.setEndereco(endereco);
         pedido.setDataPedido(LocalDateTime.now());
         pedido.setStatusPedido(StatusPedido.RECEBIDO);
         pedido.setNomeCliente(cliente.getNome());
@@ -128,6 +129,7 @@ public class PedidoService {
     }
 
     private void verificarTamanhoPizza(TamanhoPizza tamanhoPizza) {
+        if (tamanhoPizza == null) return;
         try {
             TamanhoPizza.valueOf(tamanhoPizza.name());
         } catch (IllegalArgumentException e) {

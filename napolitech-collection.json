@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "dce6c303-ae10-424d-beee-55606f5260a8",
+		"name": "Projeto PI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44855872",
+		"_collection_link": "https://felipealbertim-2285677.postman.co/workspace/Pizzaria-API~7d9e2f57-adf5-453a-a613-3c683f896c95/collection/44855872-dce6c303-ae10-424d-beee-55606f5260a8?action=share&source=collection_link&creator=44855872"
+	},
+	"item": [
+		{
+			"name": "Usuário",
+			"item": [
+				{
+					"name": "Cadastrar Usuários",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Marcos Paulo\",\r\n  \"email\": \"marcos@gmail.com\",\r\n  \"dataNasc\": \"10/01/1989\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"senha\": \"P@ssw0rd\",\r\n  \"confirmarSenha\": \"P@ssw0rd\",\r\n  \"telefone\": \"(11) 99999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/cadastro"
+					},
+					"response": []
+				},
+				{
+					"name": "LoginUsuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "0c2e56f5-03c3-460b-adcc-0fba57d2c71e"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"marcos@gmail.com\",\r\n  \"senha\": \"P@ssw0rd\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuário",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0Njk5NDUyNywiZXhwIjoxNzQ3MDgwOTI3fQ.IYVtLz2kFOQLDcYdRSNJ1hey4MJeYnJWUsEISshu22c"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Marcos Paulo\",\r\n  \"email\": \"marcos@gmail.com\",\r\n  \"senha\": \"P@ssw0rd\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"telefone\": \"(11) 99999-8888\",\r\n  \"dataNasc\": \"10/01/1989\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Exibir Usuário por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Exibir Usuários",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0NzAwMDQ4MiwiZXhwIjoxNzQ3MDg2ODgyfQ.NTPIpcfVjSTQfujDEHVOcoWX0mNEg0ouWNjqiLP_uGs"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estoque",
+			"item": [
+				{
+					"name": "Adicionar produto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0NzAwMTU0NSwiZXhwIjoxNzQ3MDg3OTQ1fQ.RxUA2go7e4Cd5tvYkBbpfk7RHgWumXRtihriisNn77g"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Coca-Cola Lata 350Ml\",\r\n  \"preco\": 5.90,\r\n  \"quantidade\": 25,\r\n  \"ingredientes\": \"\",\r\n  \"categoriaProduto\": \"REFRIGERANTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/produtos"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar produto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0Njk5NDgzNiwiZXhwIjoxNzQ3MDgxMjM2fQ.ytF80RM55DUHykjOeWbaO8OsZDWC6eP4wtCB3JrE7oI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/produtos"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar produtos por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0Njk5NDgzNiwiZXhwIjoxNzQ3MDgxMjM2fQ.ytF80RM55DUHykjOeWbaO8OsZDWC6eP4wtCB3JrE7oI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/produtos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Criar Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IkNMSUVOVEUiLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTk4OS0wMS0xMCIsImlhdCI6MTc0NzAwMzk1MSwiZXhwIjoxNzQ3MDkwMzUxfQ.dKYMOXxVPs0kF3ayCyVT088bwPZtOl1v66KgEmkeniI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clienteId\": 1,\r\n  \"nomeCliente\": \"Marcos Paulo\",\r\n  \"telefone\": \"(11) 99999-9999\",\r\n  \"enderecoId\": 1, \r\n  \"observacao\": \"Sem cebola na pizza\",\r\n  \"tipoEntrega\": \"DELIVERY\",\r\n  \"itens\": [\r\n    {\r\n      \"produto\": [1, 2],\r\n      \"quantidade\": 1,\r\n      \"tamanhoPizza\": \"MEIO_A_MEIO\",\r\n      \"bordaRecheada\": \"CATUPIRY\"\r\n    },\r\n    {\r\n      \"produto\": [3],\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pedidos"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pedidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IkNMSUVOVEUiLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTk4OS0wMS0xMCIsImlhdCI6MTc0NzAwMzk1MSwiZXhwIjoxNzQ3MDkwMzUxfQ.dKYMOXxVPs0kF3ayCyVT088bwPZtOl1v66KgEmkeniI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/pedidos"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IkNMSUVOVEUiLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTk4OS0wMS0xMCIsImlhdCI6MTc0NzAwNDE2NSwiZXhwIjoxNzQ3MDkwNTY1fQ.V9X1zRa-XOzf4gv1ZCNorHuAXCj6cLMbsixnjU0VD0w"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"EM_PREPARO\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/pedidos/1/status"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pedido por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IkNMSUVOVEUiLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTk4OS0wMS0xMCIsImlhdCI6MTc0NzAwNDE2NSwiZXhwIjoxNzQ3MDkwNTY1fQ.V9X1zRa-XOzf4gv1ZCNorHuAXCj6cLMbsixnjU0VD0w"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/pedidos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Adicionar endereço",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0NzAwMTcyNCwiZXhwIjoxNzQ3MDg4MTI0fQ.bqAw_5rO-wX75vr8rCagH3CSeXGBlyYFcDQMuBl778E"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"Rua Haddock Lobo\",\r\n    \"numero\": 595,\r\n    \"bairro\": \"Consolação\",\r\n    \"complemento\": \"Digital Building\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"01414-001\",\r\n    \"usuarioId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/enderecos"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar endereços",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/enderecos"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar endereços por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/app-service/api/enderecos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Password",
+			"item": [
+				{
+					"name": "Request de senha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"aaa@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/password-reset/request"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset de senha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"\",\r\n    \"newPassword\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/password-reset/reset"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Atendente",
+			"item": [
+				{
+					"name": "Cadastrar Atendente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRyb2JveGxpdmU2NDE0QGdtYWlsLmNvbSIsImlkIjoxLCJlbWFpbCI6InBlZHJvYm94bGl2ZTY0MTRAZ21haWwuY29tIiwibm9tZSI6InAgcGlyZXMiLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjIuMTIyLjExMi05OSIsImRhdGFOYXNjIjoiMjQvMDIvMjAwNiIsImlhdCI6MTc0NjkzMTc1OCwiZXhwIjoxNzQ3MDE4MTU4fQ.TjqEjjS6QhvSXQBfmHW4CE-KBDlPxzNYlzC4gP7dRoo"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Pedro Pires\",\r\n  \"email\": \"piresaa@gmail.com\",\r\n  \"dataNasc\": \"20/02/1999\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"senha\": \"1234\",\r\n  \"confirmarSenha\": \"1234\",\r\n  \"telefone\": \"11993742094\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/cadastro/atendente"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": []
+		},
+		{
+			"name": "Cadastrar Admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRyb2JveGxpdmU2NDE0QGdtYWlsLmNvbSIsImlkIjoxLCJlbWFpbCI6InBlZHJvYm94bGl2ZTY0MTRAZ21haWwuY29tIiwibm9tZSI6InAgcGlyZXMiLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjIuMTIyLjExMi05OSIsImRhdGFOYXNjIjoiMjQvMDIvMjAwNiIsImlhdCI6MTc0NjkzMTc1OCwiZXhwIjoxNzQ3MDE4MTU4fQ.TjqEjjS6QhvSXQBfmHW4CE-KBDlPxzNYlzC4gP7dRoo"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Pedro Pires\",\r\n  \"email\": \"piresaa@gmail.com\",\r\n  \"dataNasc\": \"20/02/1999\",\r\n  \"cpf\": \"123.123.123-11\",\r\n  \"senha\": \"1234\",\r\n  \"confirmarSenha\": \"1234\",\r\n  \"telefone\": \"11993742094\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/cadastro/admin"
+			},
+			"response": []
+		}
+	]
+}

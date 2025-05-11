@@ -19,7 +19,7 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository; // Adicionado para buscar usuário
+    private UsuarioRepository usuarioRepository;
 
     @Transactional
     public Endereco cadastrarEndereco(EnderecoDTO enderecoDTO) {

@@ -41,12 +41,15 @@ public class ItemPedidoDTO {
     public ItemPedidoDTO(
             @JsonProperty("produto") List<Integer> produto,
             @JsonProperty("quantidade") Integer quantidade,
-            @JsonProperty("tamanhoPizza") TamanhoPizza tamanhoPizza
+            @JsonProperty("tamanhoPizza") TamanhoPizza tamanhoPizza,
+            @JsonProperty("bordaRecheada") BordaRecheada bordaRecheada
     ) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.tamanhoPizza = tamanhoPizza;
+        this.bordaRecheada = bordaRecheada;
     }
+
 
     public BordaRecheada getBordaRecheada() {
         return bordaRecheada;

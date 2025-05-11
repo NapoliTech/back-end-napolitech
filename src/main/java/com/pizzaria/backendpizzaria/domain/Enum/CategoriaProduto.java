@@ -11,5 +11,4 @@ public enum CategoriaProduto {
     PIZZA_DOCE,
     ESFIHA,
     ESFIHA_DOCE
-
 }

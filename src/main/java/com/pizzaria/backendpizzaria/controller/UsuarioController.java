@@ -102,7 +102,7 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>> atualizarUsuario(
             @Parameter(description = "ID do usuário a ser atualizado.", example = "1")
-            @Validated @PathVariable Long id,
+            @Validated @PathVariable("id") Long id,
             @RequestBody UsuarioAtualizacaoDTO usuarioDTO) {
         Usuario usuarioParaAtuallizar = usuarioService.atualizarUsuario(id, usuarioDTO);
         Map<String, Object> response = new HashMap<>();
