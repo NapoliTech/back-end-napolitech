@@ -120,7 +120,7 @@
 			]
 		},
 		{
-			"name": "Estoque",
+			"name": "Produto",
 			"item": [
 				{
 					"name": "Adicionar produto",
