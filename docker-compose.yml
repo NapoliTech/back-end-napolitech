@@ -1,6 +1,28 @@
 version: '3.8'
 
+networks:
+  pizzaria-network:
+    driver: bridge
+
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/pizzaria_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: napolitech
+      SPRING_DATASOURCE_PASSWORD: napolitech_dev
+      SPRING_JPA_HIBERNATE_DDL_AUTO: drop-and-create
+    networks:
+      - pizzaria-network
+
   db:
     image: mysql:8.0
     container_name: container_db
@@ -8,7 +30,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: backend_pi
+      MYSQL_DATABASE: pizzaria_db
       MYSQL_USER: napolitech
       MYSQL_PASSWORD: napolitech_dev
       MYSQL_ROOT_PASSWORD: root
@@ -16,3 +38,5 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s
       retries: 10
+    networks:
+      - pizzaria-network
