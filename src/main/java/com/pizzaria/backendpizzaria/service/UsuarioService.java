@@ -92,6 +92,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("ATENDENTE");
         usuario.setTelefone(usuarioDTO.getTelefone());
+        usuario.setPedidos(0L);
 
         return usuarioRepository.save(usuario);
     }
@@ -110,6 +111,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setDataNasc(usuarioDTO.getDataNasc());
         usuario.setTipoUsuario("ADMINISTRADOR");
         usuario.setTelefone(usuarioDTO.getTelefone());
+        usuario.setPedidos(0L);
 
         return usuarioRepository.save(usuario);
     }
