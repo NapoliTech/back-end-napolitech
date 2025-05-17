@@ -70,7 +70,7 @@ public class DadosMockService {
         produto3.setPreco(5.90);
         produto3.setQuantidadeEstoque(25);
         produto3.setIngredientes("");
-        produto3.setCategoriaProduto(CategoriaProduto.REFRIGERANTE);
+        produto3.setCategoriaProduto(CategoriaProduto.BEBIDAS);
 
         produtoRepository.save(produto1);
         produtoRepository.save(produto2);
