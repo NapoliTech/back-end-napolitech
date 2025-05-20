@@ -41,6 +41,8 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findAll(pageable);
     }
 
+    public Optional<Usuario> listarUsuariosPorEmail(String email) { return usuarioRepository.findByEmail(email);}
+
     public Optional<Usuario> listarUsuariosPorId(Long id) {
         return usuarioRepository.findById(id);
     }

@@ -98,6 +98,17 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Buscar usuário por email", description = "Retorna os detalhes de um usuário pelo email.")
+    @GetMapping("/{email}")
+    public ResponseEntity<Map<String, Object>> listarUsuarioPorEmail(
+            @Parameter(description = "ID do usuário a ser buscado.", example = "napolitech@email.com")
+            @PathVariable("email") String email) {
+        Optional<Usuario> usuario = usuarioService.listarUsuariosPorEmail(email);
+        Map<String, Object> response = new HashMap<>();
+        response.put("usuario", usuario);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @Operation(summary = "Atualizar usuário", description = "Atualiza os dados de um usuário existente.")
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>> atualizarUsuario(
