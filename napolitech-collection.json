@@ -103,6 +103,21 @@
 					"response": []
 				},
 				{
+					"name": "Exibir Usuário por email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/{email}"
+					},
+					"response": []
+				},
+				{
 					"name": "Exibir Usuários",
 					"request": {
 						"auth": {
@@ -289,6 +304,30 @@
 					"response": []
 				},
 				{
+					"name": "Atualizar endereço",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjb3NAZ21haWwuY29tIiwiaWQiOjEsImVtYWlsIjoibWFyY29zQGdtYWlsLmNvbSIsIm5vbWUiOiJNYXJjb3MgUGF1bG8iLCJ0aXBvVXN1YXJpbyI6IlVTVUFSSU9fQ09NVU0iLCJjcGYiOiIxMjMuMTIzLjEyMy0xMSIsImRhdGFOYXNjIjoiMTAvMDEvMTk4OSIsImlhdCI6MTc0NzAwMTcyNCwiZXhwIjoxNzQ3MDg4MTI0fQ.bqAw_5rO-wX75vr8rCagH3CSeXGBlyYFcDQMuBl778E"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"Rua Haddock Lobo\",\r\n    \"numero\": 595,\r\n    \"bairro\": \"Consolação\",\r\n    \"complemento\": \"Digital Building\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"01414-001\",\r\n    \"usuarioId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/enderecos/{usuarioId}/{enderecoId}"
+					},
+					"response": []
+				},
+				{
 					"name": "Listar endereços",
 					"request": {
 						"method": "GET",
@@ -303,6 +342,15 @@
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:8080/app-service/api/enderecos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar endereço por email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/app-service/api/enderecos/{email}"
 					},
 					"response": []
 				}
