@@ -50,6 +50,10 @@ public class EnderecoService {
         return enderecoRepository.findById(id);
     }
 
+    public Optional<Endereco> listarEnderecoPorEmail(String email) {
+        return enderecoRepository.findByEmail(email);
+    }
+
     public List<Endereco> listarEnderecos() {
         return enderecoRepository.findAll();
     }

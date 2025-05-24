@@ -61,6 +61,16 @@ public class EnderecoController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Buscar endereço por email", description = "Retorna os detalhes de um endereço pelo email.")
+    @GetMapping("/{email}")
+    public ResponseEntity<Map<String, Object>> listarEnderecoPorEmail(
+            @Parameter(description = "email do endereço a ser buscado.", example = "napolitech@email.com") @PathVariable String email) {
+        Optional<Endereco> endereco = enderecoService.listarEnderecoPorEmail(email);
+        Map<String, Object> response = new HashMap<>();
+        response.put("endereco", endereco);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @Operation(summary = "Listar todos os endereços", description = "Retorna uma lista de todos os endereços cadastrados.")
     @GetMapping
     public ResponseEntity<List<Endereco>> listarEnderecos() {
