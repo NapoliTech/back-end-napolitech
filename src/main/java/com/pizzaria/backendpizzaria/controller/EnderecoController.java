@@ -62,7 +62,7 @@ public class EnderecoController {
     }
 
     @Operation(summary = "Buscar endereço por email", description = "Retorna os detalhes de um endereço pelo email.")
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Map<String, Object>> listarEnderecoPorEmail(
             @Parameter(description = "email do endereço a ser buscado.", example = "napolitech@email.com") @PathVariable String email) {
         Optional<Endereco> endereco = enderecoService.listarEnderecoPorEmail(email);
