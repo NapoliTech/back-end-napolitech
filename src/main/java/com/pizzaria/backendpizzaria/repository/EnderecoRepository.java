@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface EnderecoRepository extends JpaRepository<Endereco,Integer> {
 
-    @Query("SELECT e FROM Endereco e JOIN Usuario u ON e.usuarioId = u.idUsuario WHERE u.email = :email")
+    @Query("SELECT e FROM Endereco e WHERE e.usuario.email = :email")
     Optional<Endereco> findByEmail(@Param("email") String email);
 }
