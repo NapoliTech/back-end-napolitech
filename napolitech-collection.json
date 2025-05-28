@@ -466,6 +466,32 @@
 					"response": []
 				}
 			]
-		}
+		},
+			{
+				"name": "Dashboard",
+				"item": [
+					{
+						"name": "Listar KPIs",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "http://localhost:8080/api/dashboard/kpis",
+								"protocol": "http",
+								"host": [
+									"localhost"
+								],
+								"port": "8080",
+								"path": [
+									"api",
+									"dashboard",
+									"kpis"
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			}
 	]
 }

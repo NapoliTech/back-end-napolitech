@@ -58,6 +58,7 @@ public class EnderecoController {
         Optional<Endereco> endereco = enderecoService.listarEnderecoPorId(id);
         Map<String, Object> response = new HashMap<>();
         response.put("endereco", endereco);
+        response.put("usuario", endereco.map(Endereco::getUsuario).orElse(null));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -68,6 +69,7 @@ public class EnderecoController {
         Optional<Endereco> endereco = enderecoService.listarEnderecoPorEmail(email);
         Map<String, Object> response = new HashMap<>();
         response.put("endereco", endereco);
+        response.put("usuario", endereco.map(Endereco::getUsuario).orElse(null));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
