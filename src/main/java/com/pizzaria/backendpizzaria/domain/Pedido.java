@@ -1,5 +1,6 @@
 package com.pizzaria.backendpizzaria.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
 import com.pizzaria.backendpizzaria.domain.Enum.TipoEntrega;
 import jakarta.persistence.*;
@@ -38,6 +39,7 @@ public class Pedido {
     private TipoEntrega tipoEntrega;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<ItemPedido> itens = new ArrayList<>();
 
     private LocalDateTime dataPedido;

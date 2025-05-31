@@ -36,6 +36,7 @@ public class PedidoController {
             Pedido pedidoCriado = pedidoService.criarPedido(pedidoDTO);
             Map<String, Object> response = new HashMap<>();
             response.put("pedidoId", pedidoCriado.getId());
+            response.put("dataPedido", pedidoCriado.getDataPedido());
             response.put("valorTotal", pedidoCriado.getPrecoTotal());
             response.put("itens", pedidoCriado.getItens());
             response.put("nomeCliente", pedidoCriado.getCliente().getNome());

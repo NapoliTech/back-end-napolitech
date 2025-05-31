@@ -1,5 +1,6 @@
 package com.pizzaria.backendpizzaria.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
 import com.pizzaria.backendpizzaria.domain.Enum.TamanhoPizza;
@@ -12,7 +13,7 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;

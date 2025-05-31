@@ -4,7 +4,6 @@ import com.pizzaria.backendpizzaria.config.JwtUtil;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
 import com.pizzaria.backendpizzaria.domain.Usuario;
-import com.pizzaria.backendpizzaria.domain.UsuarioDetailsAdapter;
 import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
 import com.pizzaria.backendpizzaria.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,20 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -187,10 +183,20 @@ public class UsuarioService implements UserDetailsService {
         usuarioRepository.delete(usuario);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
-        return new UsuarioDetailsAdapter(usuario);
+    public UserDetails loadUserByUsername(String username) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(username);
+        if (usuarioOptional.isEmpty()) {
+            throw new EntityNotFoundException("Usuário não encontrado com o email: " + username);
+        }
+        Usuario usuario = usuarioOptional.get();
+        return org.springframework.security.core.userdetails.User
+                .withUsername(usuario.getEmail())
+                .password(usuario.getSenha())
+                .authorities(usuario.getTipoUsuario())
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(false)
+                .build();
     }
 }

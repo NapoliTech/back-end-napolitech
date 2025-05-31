@@ -5,6 +5,7 @@ import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
 import com.pizzaria.backendpizzaria.domain.Enum.TipoEntrega;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Schema(description = "Representa os dados de um pedido no sistema.")
@@ -42,6 +43,17 @@ public class PedidoDTO {
 
     @Schema(description = "Tipo de borda recheada, se aplicável.", example = "CATUPIRY", required = false)
     private BordaRecheada bordaRecheada;
+
+    @Schema(description = "Data e hora em que o pedido foi realizado.", example = "2023-10-01T12:30:00", required = true)
+    private LocalDateTime dataPedido;
+
+    public LocalDateTime getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(LocalDateTime dataPedido) {
+        this.dataPedido = dataPedido;
+    }
 
     public TipoEntrega getTipoEntrega() {
         return tipoEntrega;
