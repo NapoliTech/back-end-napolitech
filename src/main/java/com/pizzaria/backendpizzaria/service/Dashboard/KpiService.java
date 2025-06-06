@@ -36,7 +36,9 @@ public class KpiService {
         String[] meses = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
         List<Map<String, Object>> faturamentoAnual = new ArrayList<>();
 
-        for (int mes = 1; mes <= 12; mes++) {
+        int mesAtual = LocalDateTime.now().getMonthValue();
+
+        for (int mes = 1; mes <= mesAtual; mes++) {
             Double valorMes = calcularFaturamentoMensal(mes, ano);
             Map<String, Object> dadosMes = new HashMap<>();
             dadosMes.put("mes", meses[mes - 1]);
