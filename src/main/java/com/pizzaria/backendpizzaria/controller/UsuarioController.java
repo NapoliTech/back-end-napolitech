@@ -107,6 +107,7 @@ public class UsuarioController {
                     .map(pedido -> {
                         Map<String, Object> pedidoMap = new HashMap<>();
                         pedidoMap.put("id", pedido.getId());
+                        pedidoMap.put("itens", pedido.getItens());
                         pedidoMap.put("dataPedido", pedido.getDataPedido());
                         pedidoMap.put("statusPedido", pedido.getStatusPedido());
                         pedidoMap.put("precoTotal", pedido.getPrecoTotal());
