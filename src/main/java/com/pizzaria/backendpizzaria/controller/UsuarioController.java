@@ -4,7 +4,9 @@ import com.pizzaria.backendpizzaria.domain.DTO.Login.LoginDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioCreatedDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioRegistroDTO;
+import com.pizzaria.backendpizzaria.domain.Pedido;
 import com.pizzaria.backendpizzaria.domain.Usuario;
+import com.pizzaria.backendpizzaria.repository.PedidoRepository;
 import com.pizzaria.backendpizzaria.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,8 +22,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +34,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Operation(summary = "Registrar um novo usuário", description = "Registra um novo usuário no sistema.")
     @PostMapping("/cadastro")
@@ -87,19 +93,40 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
-    @Operation(summary = "Buscar usuário por ID", description = "Retorna os detalhes de um usuário pelo ID.")
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarUsuarioPorId(
             @Parameter(description = "ID do usuário a ser buscado.", example = "1")
             @PathVariable("id") Long id) {
         Optional<Usuario> usuario = usuarioService.listarUsuariosPorId(id);
-        Map<String, Object> response = new HashMap<>();
-        response.put("usuario", usuario);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        if (usuario.isPresent()) {
+            List<Pedido> pedidosDoUsuario = pedidoRepository.findByClienteIdUsuario(id);
+
+
+            List<Map<String, Object>> pedidosResumidos = pedidosDoUsuario.stream()
+                    .map(pedido -> {
+                        Map<String, Object> pedidoMap = new HashMap<>();
+                        pedidoMap.put("id", pedido.getId());
+                        pedidoMap.put("dataPedido", pedido.getDataPedido());
+                        pedidoMap.put("statusPedido", pedido.getStatusPedido());
+                        pedidoMap.put("precoTotal", pedido.getPrecoTotal());
+                        return pedidoMap;
+                    })
+                    .collect(Collectors.toList());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("usuario", usuario.get());
+            response.put("pedidosQuantidade", pedidosDoUsuario.size());
+            response.put("pedidosRealizados", pedidosResumidos);
+
+            return ResponseEntity.ok(response);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Buscar usuário por email", description = "Retorna os detalhes de um usuário pelo email.")
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Map<String, Object>> listarUsuarioPorEmail(
             @Parameter(description = "ID do usuário a ser buscado.", example = "napolitech@email.com")
             @PathVariable("email") String email) {

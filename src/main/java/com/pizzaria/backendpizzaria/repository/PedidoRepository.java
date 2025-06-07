@@ -17,6 +17,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
     List<Pedido> findByDataPedidoBetween(LocalDateTime inicio, LocalDateTime fim);
 
+    List<Pedido> findByClienteIdUsuario(Long idUsuario);
+
     @Query("SELECT SUM(p.precoTotal) FROM Pedido p WHERE p.dataPedido BETWEEN :start AND :end")
     Double sumPrecoTotalByDataPedidoBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
