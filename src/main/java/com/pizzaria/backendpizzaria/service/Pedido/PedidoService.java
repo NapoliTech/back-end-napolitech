@@ -1,7 +1,6 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Pedido;
 
 import com.pizzaria.backendpizzaria.domain.*;
-import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ItemPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Enum.BordaRecheada;
@@ -25,22 +24,31 @@ import java.util.stream.Collectors;
 @Service
 public class PedidoService {
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
-    @Autowired
-    private ProdutoRepository produtoRepository;
-    @Autowired
-    private UsuarioRepository clienteRepository;
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    private final PedidoRepository pedidoRepository;
+
+    private final ProdutoRepository produtoRepository;
+
+    private final UsuarioRepository clienteRepository;
+
+    private final PedidoValidacao pedidoValidacao;
+
+    private final PedidoListagem pedidoListagem;
+
+    public PedidoService(PedidoRepository pedidoRepository, ProdutoRepository produtoRepository, UsuarioRepository clienteRepository, PedidoValidacao pedidoValidacao, PedidoListagem pedidoListagem) {
+        this.pedidoRepository = pedidoRepository;
+        this.produtoRepository = produtoRepository;
+        this.clienteRepository = clienteRepository;
+        this.pedidoValidacao = pedidoValidacao;
+        this.pedidoListagem = pedidoListagem;
+    }
 
     @Transactional
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
-        validarPedidoDTO(pedidoDTO);
+        pedidoValidacao.validarPedidoDTO(pedidoDTO);
 
-        Usuario cliente = buscarCliente(pedidoDTO.getClienteId());
+        Usuario cliente = pedidoListagem.buscarCliente(pedidoDTO.getClienteId());
         cliente.setPedidos(+1L);
-        validarEnderecoCliente(cliente);
+        pedidoValidacao.validarEnderecoCliente(cliente);
 
         Pedido pedido = inicializarPedido(pedidoDTO, cliente);
         List<ItemPedido> itens = processarItensPedido(pedidoDTO, pedido);
@@ -50,29 +58,6 @@ public class PedidoService {
         pedidoRepository.save(pedido);
 
         return pedido;
-    }
-
-    private void validarPedidoDTO(PedidoDTO pedidoDTO) {
-        if (pedidoDTO.getClienteId() == null) {
-            throw new RuntimeException("Cliente ID não pode ser nulo.");
-        }
-    }
-
-    private Usuario buscarCliente(Long clienteId) {
-        return clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new RuntimeException("Cliente com ID " + clienteId + " não encontrado"));
-    }
-
-    private void validarEnderecoCliente(Usuario cliente) {
-        if (cliente.getEndereco() == null) {
-            throw new ValidationException("O cliente não possui um endereço cadastrado. Por favor, cadastre um endereço.");
-        }
-    }
-
-    private void validarTipoEntrega(PedidoDTO pedidoDTO) {
-        if (pedidoDTO.getTipoEntrega() == null) {
-            throw new ValidationException("Tipo de entrega não pode ser nulo.");
-        }
     }
 
     private Pedido inicializarPedido(PedidoDTO pedidoDTO, Usuario cliente) {
@@ -92,10 +77,10 @@ public class PedidoService {
         double valorTotal = 0.0;
 
         for (ItemPedidoDTO itemDTO : pedidoDTO.getItens()) {
-            validarItemPedidoDTO(itemDTO);
+            pedidoValidacao.validarItemPedidoDTO(itemDTO);
 
-            List<Produto> produtos = buscarProdutos(itemDTO.getProduto());
-            verificarTamanhoPizza(itemDTO.getTamanhoPizza());
+            List<Produto> produtos = pedidoListagem.buscarProdutos(itemDTO.getProduto());
+            pedidoValidacao.verificarTamanhoPizza(itemDTO.getTamanhoPizza());
 
             if (itemDTO.getTamanhoPizza() == TamanhoPizza.MEIO_A_MEIO && produtos.size() != 2) {
                 throw new ValidationException("Pizzas MEIO_A_MEIO devem conter exatamente 2 sabores.");
@@ -112,27 +97,6 @@ public class PedidoService {
 
         pedido.setPrecoTotal(valorTotal);
         return itens;
-    }
-
-    private void validarItemPedidoDTO(ItemPedidoDTO itemDTO) {
-        if (itemDTO.getProduto() == null || itemDTO.getProduto().isEmpty()) {
-            throw new ValidationException("Produto ID não pode ser nulo ou vazio.");
-        }
-    }
-
-    private List<Produto> buscarProdutos(List<Integer> produtosIds) {
-        return produtosIds.stream()
-                .map(produtoId -> produtoRepository.findById(produtoId)
-                        .orElseThrow(() -> new ValidationException("Produto com ID " + produtoId + " não encontrado")))
-                .collect(Collectors.toList());
-    }
-
-    private void verificarTamanhoPizza(TamanhoPizza tamanhoPizza) {
-        try {
-            TamanhoPizza.valueOf(tamanhoPizza.name());
-        } catch (IllegalArgumentException e) {
-            throw new ValidationException("Tamanho de pizza inválido: " + tamanhoPizza);
-        }
     }
 
     private ItemPedido criarItemPedido(ItemPedidoDTO itemDTO, Pedido pedido, Produto produto) {
@@ -189,12 +153,6 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
-    public Optional<Pedido> listarPedidoPorId(Long id) {
-        return pedidoRepository.findById(Math.toIntExact(id));
-    }
 
-    public List<Pedido> listarPedidos() {
-        return pedidoRepository.findAll();
-    }
 
 }

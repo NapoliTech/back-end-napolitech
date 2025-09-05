@@ -2,7 +2,7 @@ package com.pizzaria.backendpizzaria.controller;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Produto;
-import com.pizzaria.backendpizzaria.service.ProdutoService;
+import com.pizzaria.backendpizzaria.service.Estoque.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +25,7 @@ public class ProdutoController {
     public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
+
 
     @Operation(summary = "Cadastrar um novo produto", description = "Registra um novo produto no sistema.")
     @PostMapping

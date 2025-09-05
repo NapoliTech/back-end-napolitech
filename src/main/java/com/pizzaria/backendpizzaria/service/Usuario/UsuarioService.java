@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Usuario;
 
 import com.pizzaria.backendpizzaria.config.JwtUtil;
 import com.pizzaria.backendpizzaria.domain.DTO.Login.UsuarioAtualizacaoDTO;
@@ -24,14 +24,20 @@ import java.util.regex.Pattern;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
+
+    private final UsuarioValidacao usuarioValidacao;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, UsuarioValidacao usuarioValidacao) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+        this.usuarioValidacao = usuarioValidacao;
+    }
 
     public Page<Usuario> listarUsuarios(Pageable pageable) {
         return usuarioRepository.findAll(pageable);
@@ -59,9 +65,9 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registro(UsuarioRegistroDTO usuarioDTO) {
-        validarCampos(usuarioDTO);
-        validarCPF(usuarioDTO.getCpf());
-        validarTelefone(usuarioDTO.getTelefone());
+        usuarioValidacao.validarCampos(usuarioDTO);
+        usuarioValidacao.validarCPF(usuarioDTO.getCpf());
+        usuarioValidacao.validarTelefone(usuarioDTO.getTelefone());
         Usuario usuario = new Usuario();
 
         usuario.setEmail(usuarioDTO.getEmail());
@@ -78,9 +84,9 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registroAtendente(UsuarioRegistroDTO usuarioDTO) {
-        validarCampos(usuarioDTO);
-        validarCPF(usuarioDTO.getCpf());
-        validarTelefone(usuarioDTO.getTelefone());
+        usuarioValidacao.validarCampos(usuarioDTO);
+        usuarioValidacao.validarCPF(usuarioDTO.getCpf());
+        usuarioValidacao.validarTelefone(usuarioDTO.getTelefone());
         Usuario usuario = new Usuario();
 
         usuario.setEmail(usuarioDTO.getEmail());
@@ -97,9 +103,9 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registroAdmin(UsuarioRegistroDTO usuarioDTO) {
-        validarCampos(usuarioDTO);
-        validarCPF(usuarioDTO.getCpf());
-        validarTelefone(usuarioDTO.getTelefone());
+        usuarioValidacao.validarCampos(usuarioDTO);
+        usuarioValidacao.validarCPF(usuarioDTO.getCpf());
+        usuarioValidacao.validarTelefone(usuarioDTO.getTelefone());
         Usuario usuario = new Usuario();
 
         usuario.setEmail(usuarioDTO.getEmail());
@@ -125,55 +131,7 @@ public class UsuarioService {
         throw new ValidationException("Credenciais inválidas");
     }
 
-    private void validarCampos(UsuarioRegistroDTO usuarioDTO) {
-        if (usuarioRepository.existsByEmail(usuarioDTO.getEmail())) {
-            throw new ValidationException("Email já está em uso");
-        }
 
-        if (usuarioDTO.getEmail() == null || usuarioDTO.getEmail().isBlank() ||
-                usuarioDTO.getSenha() == null || usuarioDTO.getSenha().isBlank() ||
-                usuarioDTO.getConfirmarSenha() == null || usuarioDTO.getConfirmarSenha().isBlank() ||
-                usuarioDTO.getNome() == null || usuarioDTO.getNome().isBlank() ||
-                usuarioDTO.getCpf() == null || usuarioDTO.getCpf().isBlank() ||
-                usuarioDTO.getDataNasc() == null || usuarioDTO.getTelefone() == null || usuarioDTO.getTelefone().isBlank()) {
-            throw new ValidationException( "Todos os campos são obrigatórios");
-        }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataNascimento;
-        try {
-            dataNascimento = LocalDate.parse(usuarioDTO.getDataNasc(), formatter);
-        } catch (DateTimeParseException e) {
-            throw new ValidationException("A data de nascimento deve estar no formato dd/MM/yyyy.");
-        }
-
-        if (dataNascimento.isAfter(LocalDate.now())) {
-            throw new ValidationException("A data de nascimento não pode estar no futuro.");
-        }
-
-        if (!usuarioDTO.getSenha().equals(usuarioDTO.getConfirmarSenha())) {
-            throw new ValidationException("As senhas não coincidem");
-        }
-
-        if (!usuarioDTO.getNome().contains(" ")) {
-            throw new ValidationException("O nome deve conter pelo menos um sobrenome");
-        }
-    }
-
-    private void validarCPF(String cpf) {
-        String regex = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}";
-        if (!Pattern.matches(regex, cpf)) {
-            throw new ValidationException("CPF inválido. O formato correto é XXX.XXX.XXX-XX");
-        }
-    }
-
-    private void validarTelefone(String telefone) {
-        String telefoneNumerico = telefone.replaceAll("[^0-9]", "");
-
-        if (telefoneNumerico.length() < 10 || telefoneNumerico.length() > 11) {
-            throw new ValidationException("Número de telefone inválido. Formatos aceitos: (11) 98765-4321 ou 11987654321.");
-        }
-    }
 
     @Transactional
     public void deletarUsuario(Long id) {

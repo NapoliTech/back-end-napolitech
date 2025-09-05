@@ -4,7 +4,7 @@ import com.pizzaria.backendpizzaria.domain.DTO.Login.ClienteResumoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
-import com.pizzaria.backendpizzaria.service.PedidoService;
+import com.pizzaria.backendpizzaria.service.Pedido.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
 package com.pizzaria.backendpizzaria.config;
 
-import com.pizzaria.backendpizzaria.service.UsuarioService;
+import com.pizzaria.backendpizzaria.service.Usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

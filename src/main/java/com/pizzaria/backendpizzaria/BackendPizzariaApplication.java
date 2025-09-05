@@ -1,6 +1,6 @@
 package com.pizzaria.backendpizzaria;
 
-import com.pizzaria.backendpizzaria.service.DadosMockService;
+import com.pizzaria.backendpizzaria.service.Dashboard.DadosMockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

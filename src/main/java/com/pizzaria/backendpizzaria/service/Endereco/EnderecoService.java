@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Endereco;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.Endereco;

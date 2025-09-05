@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Dashboard;
 
 import com.pizzaria.backendpizzaria.domain.Endereco;
 import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;

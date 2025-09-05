@@ -1,8 +1,7 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Estoque;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.ProdutoDTO;
 import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
-import com.pizzaria.backendpizzaria.domain.Enum.StatusPedido;
 import com.pizzaria.backendpizzaria.domain.Produto;
 import com.pizzaria.backendpizzaria.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

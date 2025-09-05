@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.service;
+package com.pizzaria.backendpizzaria.service.Email;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Login.Email;
 import com.pizzaria.backendpizzaria.domain.PasswordResetToken;

@@ -2,7 +2,7 @@ package com.pizzaria.backendpizzaria.controller;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.EnderecoDTO;
 import com.pizzaria.backendpizzaria.domain.Endereco;
-import com.pizzaria.backendpizzaria.service.EnderecoService;
+import com.pizzaria.backendpizzaria.service.Endereco.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

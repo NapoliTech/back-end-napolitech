@@ -2,7 +2,7 @@ package com.pizzaria.backendpizzaria.controller;
 
 import com.pizzaria.backendpizzaria.domain.DTO.Login.ResetPasswordRequest;
 import com.pizzaria.backendpizzaria.infra.exception.ValidationException;
-import com.pizzaria.backendpizzaria.service.PasswordResetService;
+import com.pizzaria.backendpizzaria.service.Email.PasswordResetService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
