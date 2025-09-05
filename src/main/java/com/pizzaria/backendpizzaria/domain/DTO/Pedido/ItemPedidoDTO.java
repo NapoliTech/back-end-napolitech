@@ -85,4 +85,8 @@ public class ItemPedidoDTO {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
+
+    public void setProduto(List<Integer> produto) {
+        this.produto = produto;
+    }
 }
