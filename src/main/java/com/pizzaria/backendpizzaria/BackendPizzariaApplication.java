@@ -1,6 +1,6 @@
 package com.pizzaria.backendpizzaria;
 
-import com.pizzaria.backendpizzaria.service.Dashboard.DadosMockService;
+import com.pizzaria.backendpizzaria.mock.DadosMock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BackendPizzariaApplication implements CommandLineRunner {
 
     @Autowired
-    private DadosMockService dadosMockService;
+    private DadosMock dadosMock;
 
     public static void main(String[] args) {
         SpringApplication.run(BackendPizzariaApplication.class, args);
@@ -18,6 +18,6 @@ public class BackendPizzariaApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        dadosMockService.carregarDados();
+        dadosMock.carregarDados();
     }
 }

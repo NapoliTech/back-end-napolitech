@@ -1,4 +1,4 @@
-package com.pizzaria.backendpizzaria.service.Dashboard;
+package com.pizzaria.backendpizzaria.mock;
 
 import com.pizzaria.backendpizzaria.domain.Endereco;
 import com.pizzaria.backendpizzaria.domain.Enum.CategoriaProduto;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DadosMockService {
+public class DadosMock {
 
     @Autowired
     private UsuarioRepository usuarioRepository;

@@ -25,6 +25,10 @@ public class ProdutoService {
         produto.setQuantidadeEstoque(produtoDTO.getQuantidade());
         produto.setIngredientes(produtoDTO.getIngredientes());
 
+        if (produtoDTO.getCategoriaProduto() == null) {
+            throw new RuntimeException("Categoria inválida: null");
+        }
+
         try {
             produto.setCategoriaProduto(CategoriaProduto.valueOf(produtoDTO.getCategoriaProduto().toString().toUpperCase()));
         } catch (IllegalArgumentException e) {
