@@ -4,6 +4,7 @@ import com.pizzaria.backendpizzaria.domain.DTO.Login.ClienteResumoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.AtualizarStatusPedidoDTO;
 import com.pizzaria.backendpizzaria.domain.DTO.Pedido.PedidoDTO;
 import com.pizzaria.backendpizzaria.domain.Pedido;
+import com.pizzaria.backendpizzaria.service.Pedido.PedidoListagem;
 import com.pizzaria.backendpizzaria.service.Pedido.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,9 +24,11 @@ import java.util.Optional;
 public class PedidoController {
 
     private final PedidoService pedidoService;
+    private final PedidoListagem pedidoListagem;
 
-    public PedidoController(PedidoService pedidoService) {
+    public PedidoController(PedidoService pedidoService, PedidoListagem pedidoListagem) {
         this.pedidoService = pedidoService;
+        this.pedidoListagem = pedidoListagem;
     }
 
     @Operation(summary = "Criar um novo pedido", description = "Registra um novo pedido no sistema.")
@@ -66,7 +69,7 @@ public class PedidoController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> listarPedidoPorId(
             @Parameter(description = "ID do pedido a ser buscado.", example = "1") @PathVariable("id") Long id) {
-        Optional<Pedido> pedidoOptional = pedidoService.listarPedidoPorId(id);
+        Optional<Pedido> pedidoOptional = pedidoListagem.listarPedidoPorId(id);
 
         if (pedidoOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -100,7 +103,7 @@ public class PedidoController {
     @Operation(summary = "Listar todos os pedidos", description = "Retorna uma lista de todos os pedidos cadastrados.")
     @GetMapping
     public ResponseEntity<List<Pedido>> listarPedidos() {
-        List<Pedido> pedidos = pedidoService.listarPedidos();
+        List<Pedido> pedidos = pedidoListagem.listarPedidos();
         return ResponseEntity.ok(pedidos);
     }
 }
