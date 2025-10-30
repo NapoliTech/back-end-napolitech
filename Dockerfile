@@ -1,9 +1,5 @@
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
-
 FROM openjdk:21-jdk-slim
 WORKDIR /app
-COPY --from=builder /app/target/backend-pizzaria-0.0.1.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY target/backend-pizzaria-1.0.0.jar backend-pizzaria-1.0.0.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "backend-pizzaria-1.0.0.jar"]
